@@ -1,0 +1,137 @@
+extends layout
+
+head
+    title = title
+
+block content
+
+    body.bg-login
+        .wait-animation
+        #wrapper.login.app-mgmt
+            #header.clearfix
+                div.col-xs-12.text-center
+                    div.col-xs-6.text-center( style="padding: 0px;")
+                        #company-logo
+                    div.col-xs-6.text-left( style="padding: 0px;")
+                        h4.magnet-title= title
+                div.col-xs-12.text-center
+                    h5.gm-subtitle= lang.welcome_admin_title
+
+            div.content-form-login
+                div.col-sm-2 &nbsp;
+                div.col-sm-8
+                    div#content-login-div.div-form
+                        form.form-horizontal(role="form",  onsubmit="return false;")
+                            h4.signin-title= lang.sign_in
+                            hr
+                            br
+                            br
+                            div.form-group
+                                label.col-sm-4.control-label(for="companyId")= lang.client_id
+                                div.col-sm-6(style="padding: 0px;")
+                                    input#companyId.form-control.text-center(type="text", name="companyId", value="#{companyId}")
+                                div.col-sm-2 &nbsp;
+                            div.form-group
+                                label.col-sm-4.control-label(for="emailId")= lang.email_address
+                                div.col-sm-6(style="padding: 0px;")
+                                    input#emailId.form-control.text-center(type="text", name="emailId", value="#{emailId}")
+                                div.col-sm-2 &nbsp;
+                            div.form-group
+                                label.col-sm-4.control-label(for="passwordId")= lang.password
+                                div.col-sm-6(style="padding: 0px;")
+                                    input#passwordId.form-control.text-center(type="password", name="")
+                                div.col-sm-2 &nbsp;
+                            div.form-group
+                                div.col-sm-12
+                                    p.error-message error
+                                    button#btnLogin.btn.btn-default(type="submit", style="text-transform: uppercase;")= lang.sign_in
+                                br
+                                br
+                                div.col-sm-12
+                                    p= lang.forgot_pass
+                                        span.click-here= lang.click_here
+                                div.col-sm-12.hidden(style="margin: 20px 0;")
+                                    h5= lang.dont_have_account
+                                    button#btnRegister(type="submit", style="text-transform: uppercase;")= lang.register
+                    
+                    div#content-register-div.div-form(style="width: 520px;")
+                        form.form-horizontal(role="form",  onsubmit="return false;")
+                            h1.magnet-title= lang.register
+                            br
+                            h5(style="margin: 10px auto; width: 240px;")= lang.fill_registration_info
+                            br
+                            div.form-group
+                                label.col-sm-3.control-label(for="regCompanyName")= lang.tenant_name
+                                div.col-sm-6(style="padding: 0px;")
+                                    input#regCompanyName.form-control(type="text", name="regCompanyName", placeholder="#{lang.eg_magnet_system_inc}")
+                                div.col-sm-3 &nbsp;
+                            div.form-group
+                                label.col-sm-3.control-label(for="regCompanyId")= lang.tenant_id
+                                div.col-sm-6(style="padding: 0px;")
+                                    input#regCompanyId.form-control(type="text", name="regCompanyId", placeholder="#{lang.eg_magnet123}")
+                                div.col-sm-3 &nbsp;
+                            div.form-group
+                                label.col-sm-3.control-label(for="regEmail")= lang.email
+                                div.col-sm-6(style="padding: 0px;")
+                                    input#regEmail.form-control(type="text", name="regEmail", placeholder="#{lang.eg_john_smith_example}")
+                                div.col-sm-3 &nbsp;
+                            div.form-group
+                                div.col-sm-12(style="margin: 20px 0;")
+                                    button#btnRegSubmit(type="submit", style="text-transform: uppercase;")= lang.request
+                                br
+                                div.col-sm-12
+                                    button#btnRegCancel(type="button", style="text-transform: uppercase;")= lang.cancel
+                                    
+                    div#content-register-confirm-div.div-form(style="width: 750px; padding: 50px 0 100px;")
+                        h4= lang.our_request_submitted_for_approval
+                        br
+                        br
+                        h4= lang.we_will_send_confirmation_email_to
+                            b hovard@gmail.com.
+                        br
+                        h4= lang.please_click_confirmaton_link_to_activate_account
+                    //.bg-reflect
+
+        #wrapper-welcome
+            .text-center
+                h2= lang.welcome_app_management
+                h4= lang.welcome_description
+            .text-center
+                .col-md-4
+                    button#create-an-app.btn
+                        img(src='images/none.png')
+                    .btn-label= lang.create_an_app
+                .col-md-4
+                    button#invite-user.btn
+                        img(src='images/none.png')
+                    .btn-label= lang.welcome_invite_users
+                .col-md-4
+                    button#manage-user-devices.btn
+                        img(src='images/none.png')
+                    .btn-label= lang.manage_user_devices
+                .col-md-4
+                    .frame-menu
+                        ol
+                            li= lang.add_roles_and_groups
+                            li= lang.add_app_categories
+                            li= lang.add_app_and_assign_group_and_cats
+                .col-md-4
+                    .frame-menu
+                        ol
+                            li= lang.add_user
+                            li= lang.invite_user
+                            li= lang.users_activates_account
+                .col-md-4
+                    .frame-menu
+                        ol
+                            li= lang.provision_user_device
+                            li= lang.manage_apps_user_device
+
+            .text-center
+                .checkbox
+                    label
+                        input#dont-show-again(type="checkbox")= lang.dont_show_again
+
+                    
+                                    
+        script(data-main="js/admin/desktop-login" src="js/libs/require.js")

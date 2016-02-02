@@ -1,0 +1,113 @@
+extends layout
+
+head
+    title= title
+
+block content
+
+    body
+        #center_spinner(style="position:fixed; top:50%; left:50%")
+        
+
+        .estee-header
+            .col-xs-2
+                img#branding-logo(src="images/assets/navigation/logo_elc.png")
+            .col-xs-8
+                .title-1 CreerStar! App Administrator
+            .col-xs-2
+                a#id-estee-signout.title-1(href="#/logout") Sign out
+
+        #id-estee-login.wrapper-login
+            .content-form-login
+                .col-sm-2 &nbsp;
+                .col-sm-8
+                    #content-login-div.div-form
+                        form.form-horizontal(role="form",  onsubmit="return false;")
+                            h4.signin-title Sign in
+                            hr
+                            br
+                            br
+                            .form-group
+                                label.col-sm-4.control-label(for="emailId") Username
+                                .col-sm-6(style="padding: 0px;")
+                                    input#emailId.form-control(type="text", name="emailId", value="")
+                                .col-sm-2 &nbsp;
+                            .form-group
+                                label.col-sm-4.control-label(for="passwordId") Password
+                                .col-sm-6(style="padding: 0px;")
+                                    input#passwordId.form-control(type="password", name="")
+                                .col-sm-2 &nbsp;
+                            .form-group
+                                .col-sm-12
+                                    p.error-message error
+                                    button#btnLogin.btn.btn-default(type="submit", style="text-transform: uppercase;") Sign in
+                                .col-sm-12.hidden
+                                    p Forgot your password?
+                                        span.click-here Click here
+
+        #id-estee-wrapper.estee-wrapper
+            .main-tabs-container
+                .main-tab-box
+                    #id-tab-career_insignts.main-tab
+                        div CAREER INSIGNTS
+                    #id-tab-experiences.main-tab(style="left: 209px;")
+                        div EXPERIENCES
+                    #id-tab-users.main-tab(style="left: 417px;")
+                        div USERS
+                    #id-tab-analytics.main-tab(style="left: 625px;")
+                        div ANALYTICS
+
+            .main-contents-conttainer
+                #id-content-career_insignts.main-content
+                #id-content-experiences.main-content
+                #id-content-users.main-content
+                #id-content-analytics.main-content
+
+        script#templateCareerView(type="text/template")
+            h2 Career
+
+        script#templateExperiencesListView(type="text/template")
+            h2 Experiences            
+            
+        script#templateUsersListView(type="text/template")
+            h2 Users            
+
+        script#templateAnalyticsView(type="text/template")
+            h2 Analytics
+
+        #confirm-alert.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4#confirm-alert-label.modal-title are you sure?
+                    .modal-body.clearfix
+                    .modal-footer
+                        button.btn.btn-default.yes(data-dismiss="modal", style="margin-right: 20px;", type="button") Confirm
+                        button.btn.btn-default.no(data-dismiss="modal", aria-hidden="true", type="button") Cancel
+
+        #error-alert.modal.fade
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4.modal-title Error
+                    .modal-body.clearfix
+                        p 
+                    .modal-footer
+                        button.btn.btn-default.no(data-dismiss="modal", type="button") Ok
+
+        #general-alert.modal.fade
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4.modal-title 
+                    .modal-body.clearfix
+                        p
+                    .modal-footer
+                        button.btn.btn-default.no(data-dismiss="modal", type="button") Ok
+
+        form(enctype="multipart/form-data", method="post", style="display: none; width: 0; height: 0;", onsubmit="return false;")
+            input#topicIcon(type="file", name="topicIcon", style="display: none;")
+
+        iframe#downloadFrame(width="0", height="0", name="downloadFrame", style="display: none;")
+
+        script(data-main="js/desktop" src="js/libs/require.js")

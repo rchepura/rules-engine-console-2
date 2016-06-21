@@ -142,14 +142,14 @@ a {
 }
 .wrapper-login .div-form {
   color: #323232;
-  border: 3px solid #8a8;
+/*border: 3px solid #8a8;*/
   border-radius: 12px;
   margin: 165px auto 0;
   padding: 5px 10px;
   width: 526px;
   height: 324px;
   text-align: center;
-  background: #f8f8ff;
+/*background: #f8f8ff;*/
 /*background: url(../images/assets/bg_window.png) no-repeat 0 0 transparent;*/
 }
 .wrapper-login .div-form hr {

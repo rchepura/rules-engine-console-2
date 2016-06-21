@@ -1,7 +1,7 @@
 define(['jquery', 'backbone', 'moment'], function($, Backbone, Moment) {
     return Backbone.View.extend({
         el: 'body',
-        defaultTab: 'action',
+        defaultTab: 'users',
         moment: Moment,
         initialize: function() {
             var me = this;
@@ -37,6 +37,7 @@ define(['jquery', 'backbone', 'moment'], function($, Backbone, Moment) {
                 elem.addClass('active');
                 elem.closest('.rules-wrapper').find('.main-contents-container.active').removeClass('active');
                 boxId = elem.attr('id').replace('tab', 'content');
+                console.info('CURR TAB: ' + boxId);
                 me.$el.find('#' + boxId).addClass('active');               
                 Backbone.history.navigate('#/' + boxId.replace('id-content-', ''));
             }

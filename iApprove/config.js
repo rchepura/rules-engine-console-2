@@ -19,7 +19,7 @@ var config = {
      * 
      * Uncommented if different from Web Admin Console Host
      */
-    , apiHost: '54.251.26.62'
+    , apiHost: '54.151.253.234'
     
     /*
      * The API Port
@@ -34,7 +34,7 @@ var config = {
     /*
      * The API Url
      */
-   , apiUrl: 'http://54.215.23.243:8443/api'
+   , apiUrl: 'http://54.151.253.234:8443/api'
    , MMS_DEVICE_ID: '1111-2222-3333-4445'
    , client_id: '57b1d5a6-0e1b-48cd-9e87-4fac73950c1d'
    

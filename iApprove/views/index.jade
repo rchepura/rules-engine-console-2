@@ -47,34 +47,54 @@ block content
         .iapprove-wrapper
             .main-tabs-container
                 .main-tab-box
-                    #id-tab-action.main-tab.active
-                        span.magnet-tab ACTIONS
-                    #id-tab-iapprove.main-tab(style="left: 164px;")
-                        span.magnet-tab SYSTEM RULES
-                    //#id-tab-users.main-tab(style="left: 328px;")
-                        span.magnet-tab USER RULES
+                    #id-tab-users.main-tab.active
+                        span.magnet-tab USERS
+                    #id-tab-groups.main-tab(style="left: 164px;")
+                        span.magnet-tab GROUPS
+                    #id-tab-configuration.main-tab(style="left: 328px;")
+                        span.magnet-tab CONFIGURATION
+                    #id-tab-report.main-tab(style="left: 492px;")
+                        span.magnet-tab REPORT
 
-            #id-content-action.main-contents-container.active
+            #id-content-users.main-contents-container.active
                 .main-content.container
                     .row.tab-buttons
+                        .col-xs-1(style="padding: 0;")
+                            button#id-add-new-user.btn.btn-default(type="button") + New
                         .col-xs-3
-                            button#id-new-action.btn.btn-default.add-action(type="button") + New
+                            button#id-default-user-icon.btn.btn-default(type="button")
+                                img.user-icon(src="images/assets/misc/profile_default.png")
+                                | Default user picture
                         .col-xs-6
                             form(onsubmit="return false;")
                                 .col-xs-8.row-field(style="padding: 0;")
                                     span.icon-search
-                                    input#id-search-action.form-control(type="text", name="modal-search-users", value="", placeholder="Search by Iapprove name")
+                                    input#id-search-users.form-control(type="text", name="modal-search-users", value="", placeholder="Search Users")
                                     span.icon-search-reset x
                                 .col-xs-4.row-label
-                                    button#id-search-action-btn-search.btn.btn-default(type="submit") Search
-                        .col-xs-3 &nbsp;
-                    .tab-header-row.container
-                        .col-xs-2.head-text Date Added
-                        .col-xs-3.head-text Action Name
-                        .col-xs-7.head-text Description
-                    .content-action-list.container
+                                    button#id-search-users-btn-search.btn.btn-default(type="submit") Search
+                        .col-xs-2.text-right
+                            button.js-download-report.btn.btn-default(type="button") Export to Excel
 
-            #id-content-iapprove.main-contents-container
+                    .row.users-row.header-row
+                        .col-xs-2.user-cell.sort-by-name(data-id="firstName") First Name
+                            span.arrow-sort-dn
+                        .col-xs-2.user-cell.sort-by-name(data-id="lastName") Last Name
+                            span.arrow-sort-dn
+                        .col-xs-2.user-cell.sort-by-name(data-id="email") Email Address
+                            span.arrow-sort-dn
+                        .col-xs-1.user-cell.sort-by-name(data-id="region", style="padding: 0px;") Location
+                            span.arrow-sort-dn
+                        .col-xs-1.user-cell.sort-by-name(data-id="role") Role
+                            span.arrow-sort-dn
+                        .col-xs-1.user-cell.text-center.sort-by-name(data-id="status", style="padding: 0px;") Has Used
+                            span.arrow-sort-dn
+                        .col-xs-1.user-cell.text-center.sort-by-user-password(style="padding: 0px;") Password
+                            span.arrow-sort-dn
+                        .col-xs-2.user-cell.text-center User Picture
+                    .content-users-list
+
+            #id-content-groups.main-contents-container
                 .main-content.container
                     .row.tab-buttons
                         .col-xs-3
@@ -95,7 +115,27 @@ block content
                         .col-xs-3.head-text Action to perform
                     .content-rule-list.container
 
-            #id-content-users.main-contents-container
+            #id-content-configuration.main-contents-container
+                .main-content.container
+                    .row.tab-buttons
+                        .col-xs-3
+                            //button#id-new-user.btn.btn-default.add-user(type="button") + New
+                        .col-xs-6
+                            form(onsubmit="return false;")
+                                .col-xs-8.row-field(style="padding: 0;")
+                                    span.icon-search
+                                    input#id-search-user.form-control(type="text", name="modal-search-users", value="", placeholder="Search by User name")
+                                    span.icon-search-reset x
+                                .col-xs-4.row-label
+                                    button#id-search-user-btn-search.btn.btn-default(type="submit") Search
+                        .col-xs-3 &nbsp;
+                    .tab-header-row.container
+                        .col-xs-2.head-text Date Added
+                        .col-xs-3.head-text User Name
+                        .col-xs-7.head-text Description
+                    .content-user-list.container
+
+            #id-content-report.main-contents-container
                 .main-content.container
                     .row.tab-buttons
                         .col-xs-3

@@ -60,7 +60,7 @@ require.config({
         }
     }
 });
-require(['jquery', 'backbone', 'router.rules', 'bootstrap', 'cookies', 'ampstore', 'moment', 'jqueryplugin', 'datepicker', 'jquery.validationEngine', 'jquery.validationEngine-en', 'select2'],
+require(['jquery', 'backbone', 'router', 'bootstrap', 'cookies', 'ampstore', 'moment', 'jqueryplugin', 'datepicker', 'jquery.validationEngine', 'jquery.validationEngine-en', 'select2'],
     function($, Backbone, Router) {
         var foo = JSON.parse;
         JSON.parse = function(str) {str = str || null; return foo(str);}

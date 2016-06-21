@@ -1,5 +1,5 @@
-define(['jquery', 'backbone', 'views/login.view', 'views/main.view', 'views/rule.view', 'views/action.view', 'views/users.view', "views/alert.general.view", "views/alert.confirm.view", "views/alert.error.view"],
-    function($, Backbone, LoginView, MainView, RuleView, ActionView, UsersView, AlertGeneralView, AlertConfirmView, AlertErrorView) {
+define(['jquery', 'backbone', 'views/login.view', 'views/main.view', 'views/iapprove.view', 'views/action.view', 'views/users.view', "views/alert.general.view", "views/alert.confirm.view", "views/alert.error.view"],
+    function($, Backbone, LoginView, MainView, IapproveView, ActionView, UsersView, AlertGeneralView, AlertConfirmView, AlertErrorView) {
         // bind alerts
         Alerts.General = new AlertGeneralView();
         Alerts.Confirm = new AlertConfirmView();
@@ -20,7 +20,7 @@ define(['jquery', 'backbone', 'views/login.view', 'views/main.view', 'views/rule
                 
                 new LoginView({eventPubSub: this.eventPubSub});
                 new MainView({eventPubSub: this.eventPubSub});
-                new RuleView({eventPubSub: this.eventPubSub});
+                new IapproveView({eventPubSub: this.eventPubSub});
                 new ActionView({eventPubSub: this.eventPubSub});
                 new UsersView({eventPubSub: this.eventPubSub});
                 
@@ -29,9 +29,10 @@ define(['jquery', 'backbone', 'views/login.view', 'views/main.view', 'views/rule
             routes: {
                 ''                  : 'main',
                 'main'              : 'main',
-                'iapprove'          : 'iapprove',
-                'action'            : 'action',
                 'users'             : 'users',
+                'groups'            : 'groups',
+                'configuration'    : 'configuration',
+                'report'            : 'report',
                 'logout'            : 'logout',
                 '*notFound'         : 'main'
             },
@@ -63,30 +64,40 @@ define(['jquery', 'backbone', 'views/login.view', 'views/main.view', 'views/rule
                     callback();
                 }
             },
-            iapprove: function() {
-                var me = this;
-                me.auth(function() {
-                    me.eventPubSub.trigger("initRule", function(tab) {
-                        if ( !tab.$el.hasClass('active') ) {
-                            $('#' + tab.$el.attr('id').replace('content', 'tab')).click();
-                        }
-                    });
-                });
-            },
-            action: function() {
-                var me = this;
-                me.auth(function() {
-                    me.eventPubSub.trigger("initAction", function(tab) {
-                        if ( !tab.$el.hasClass('active') ) {
-                            $('#' + tab.$el.attr('id').replace('content', 'tab')).click();
-                        }
-                    });
-                });
-            },
             users: function() {
                 var me = this;
                 me.auth(function() {
                     me.eventPubSub.trigger("initUsers", function(tab) {
+                        if ( !tab.$el.hasClass('active') ) {
+                            $('#' + tab.$el.attr('id').replace('content', 'tab')).click();
+                        }
+                    });
+                });
+            },
+            groups: function() {
+                var me = this;
+                me.auth(function() {
+                    me.eventPubSub.trigger("initGroups", function(tab) {
+                        if ( !tab.$el.hasClass('active') ) {
+                            $('#' + tab.$el.attr('id').replace('content', 'tab')).click();
+                        }
+                    });
+                });
+            },
+            configuration: function() {
+                var me = this;
+                me.auth(function() {
+                    me.eventPubSub.trigger("initConfiguration", function(tab) {
+                        if ( !tab.$el.hasClass('active') ) {
+                            $('#' + tab.$el.attr('id').replace('content', 'tab')).click();
+                        }
+                    });
+                });
+            },
+            report: function() {
+                var me = this;
+                me.auth(function() {
+                    me.eventPubSub.trigger("initReport", function(tab) {
                         if ( !tab.$el.hasClass('active') ) {
                             $('#' + tab.$el.attr('id').replace('content', 'tab')).click();
                         }

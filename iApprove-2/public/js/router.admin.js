@@ -1,5 +1,5 @@
-define(['jquery', 'backbone', 'views.admin/login.view', 'views.admin/main.view', "views/alert.general.view", "views/alert.confirm.view", "views/alert.error.view"],
-    function($, Backbone, LoginView, MainView, AlertGeneralView, AlertConfirmView, AlertErrorView) {
+define(['jquery', 'backbone', 'views.admin/login.view', 'views.admin/main.view', 'views.admin/admin.view', "views/alert.general.view", "views/alert.confirm.view", "views/alert.error.view"],
+    function($, Backbone, LoginView, MainView, AdminView, AlertGeneralView, AlertConfirmView, AlertErrorView) {
         // bind alerts
         Alerts.General = new AlertGeneralView();
         Alerts.Confirm = new AlertConfirmView();
@@ -20,12 +20,14 @@ define(['jquery', 'backbone', 'views.admin/login.view', 'views.admin/main.view',
                 
                 new LoginView({eventPubSub: this.eventPubSub});
                 new MainView({eventPubSub: this.eventPubSub});
+                new AdminView({eventPubSub: this.eventPubSub});
                 
                 Backbone.history.start();
             },
             routes: {
                 ''                  : 'main',
                 'main'              : 'main',
+                'admin'             : 'admin',
                 'logout'            : 'logout',
                 '*notFound'         : 'main'
             },
@@ -37,6 +39,12 @@ define(['jquery', 'backbone', 'views.admin/login.view', 'views.admin/main.view',
                     } else {
                         me.eventPubSub.trigger("initMain");
                     }
+                });
+            },
+            admin: function() {
+                var me = this;
+                me.auth(function() {
+                    me.eventPubSub.trigger("initAdmin");
                 });
             },
             auth: function(callback) {

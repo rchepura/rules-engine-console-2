@@ -50,6 +50,7 @@ define(['jquery', 'backbone', 'moment'], function($, Backbone, Moment) {
         },
         init: function() {
             var me = this;
+            Backbone.history.navigate('#/admin');
             me.hideLoader();
         },
         clientIcon: function (e) {

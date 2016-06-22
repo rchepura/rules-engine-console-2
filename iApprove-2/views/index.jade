@@ -1,0 +1,559 @@
+extends layout
+
+head
+    title= title
+
+block content
+
+    body
+        #center_spinner(style="position:fixed; top:50%; left:50%")
+        
+
+        .estee-header
+            .col-xs-10
+                img#branding-logo(src="images/assets/navigation/logo_elc.png")
+                .title-1 iapprove App Administrator <span id="id-current-user"></span>
+            .col-xs-2
+                a#id-estee-signout.title-1(href="#/logout") Sign out
+
+        #id-estee-login.wrapper-login
+            .content-form-login
+                .col-sm-2 &nbsp;
+                .col-sm-8
+                    #content-login-div.div-form
+                        form.form-horizontal(role="form",  onsubmit="return false;")
+                            h4.signin-title Sign in
+                            hr
+                            br
+                            br
+                            .form-group
+                                label.col-sm-4.control-label(for="emailId") Username
+                                .col-sm-6(style="padding: 0px;")
+                                    input#emailId.form-control(type="text", name="emailId", value="")
+                                .col-sm-2 &nbsp;
+                            .form-group
+                                label.col-sm-4.control-label(for="passwordId") Password
+                                .col-sm-6(style="padding: 0px;")
+                                    input#passwordId.form-control(type="password", name="")
+                                .col-sm-2 &nbsp;
+                            .form-group
+                                .col-sm-12
+                                    p.error-message error
+                                    button#btnLogin.btn.btn-default(type="submit", style="text-transform: uppercase;") Sign in
+                                .col-sm-12.hidden
+                                    p Forgot your password?
+                                        span.click-here Click here
+
+        #id-estee-wrapper.estee-wrapper
+            .main-tabs-container
+                .main-tab-box
+                    #id-tab-users.main-tab
+                        span.magnet-tab USERS
+                    #id-tab-groups.main-tab(style="left: 164px;")
+                        span.magnet-tab GROUPS
+                    #id-tab-configuration.main-tab(style="left: 328px;")
+                        span.magnet-tab CONFIGURATION
+                    #id-tab-report.main-tab(style="left: 492px;")
+                        span.magnet-tab REPORT
+
+            .main-contents-conttainer                
+                #id-content-users.main-content
+                    .row.tab-buttons
+                        .col-xs-1(style="padding: 0;")
+                            button#id-add-new-user.btn.btn-default(type="button") + New
+                        .col-xs-3(style="padding: 0;")
+                            button#id-default-user-icon.btn.btn-default(type="button")
+                                img.user-icon(src="images/assets/misc/profile_default.png")
+                                | Default user picture
+                        .col-xs-6(style="padding: 0;")
+                            form(onsubmit="return false;")
+                                .col-xs-8.row-field(style="padding: 0;")
+                                    span.icon-search
+                                    input#id-search-users.form-control(type="text", value="", placeholder="Enter By first or last name")
+                                    span.icon-search-reset x
+                                .col-xs-4.row-label
+                                    button#id-search-users-btn-search.btn.btn-default(type="submit") Search
+                        .col-xs-2.text-right
+                            button.js-download-report.btn.btn-default(type="button")
+                                | Export to Excel
+                    .row.users-row.header-row
+                        .col-xs-2.user-cell.sort-by-name(data-id="firstName") First Name
+                            span.arrow-sort-dn
+                        .col-xs-2.user-cell.sort-by-name(data-id="lastName") Last Name
+                            span.arrow-sort-dn
+                        .col-xs-3.user-cell.sort-by-name(data-id="email") Email Address
+                            span.arrow-sort-dn
+                        .col-xs-1.user-cell.sort-by-name(data-id="role") Role
+                            span.arrow-sort-dn
+                        .col-xs-1.user-cell.text-center.sort-by-name(data-id="status") Has Used
+                            span.arrow-sort-dn
+                        .col-xs-1.user-cell.text-center.sort-by-user-password Password
+                            span.arrow-sort-dn
+                        .col-xs-2.user-cell.text-center User Picture
+                    .content-users-list
+                #id-content-groups.main-content
+                    .row.tab-buttons
+                        .col-xs-3
+                            button#id-add-new-group.btn.btn-default(type="button") + New
+                        .col-xs-6
+                            form(onsubmit="return false;")
+                                .col-xs-8.row-field(style="padding: 0;")
+                                    span.icon-search
+                                    input#id-search-groups.form-control(type="text", name="modal-search-users", value="", placeholder="Search by Group Name")
+                                    span.icon-search-reset x
+                                .col-xs-4.row-label
+                                    button#id-search-groups-btn-search.btn.btn-default(type="submit") Search
+                        .col-xs-3.text-right
+                            button.js-download-report.btn.btn-default(type="button")
+                                | Export to Excel
+                    .row.groups-row.header-row
+                        .col-xs-2.group-cell Date Created
+                            span.arrow-sort
+                        .col-xs-2.group-cell Group Name
+                        .col-xs-3.group-cell Description
+                        .col-xs-3.group-cell Created by
+                        .col-xs-2
+                    .content-groups-list
+                #id-content-configuration.main-content
+                    .row.settings-row
+                        .col-xs-4.settings-coll-1
+                            .title-2 SUPPORT EMAIL CHANGE
+                        .col-xs-8.settings-coll-2
+                            .row
+                                .col-xs-9 
+                                    span.label-txt
+                                    input#id-settings-email.form-control(type="text", name="id-settings-email", value="", class="validate[required,custom[email]]")
+                                .col-xs-3
+                                    button.settins-email-apply.btn.btn-default(type="button") Apply
+                    .row.settings-row
+                        .col-xs-4.settings-coll-1
+                            .title-2 Change password
+                        .col-xs-8.settings-coll-2
+                            .row
+                                .col-xs-9
+                                    span.label-txt Current password
+                                    input#currentPassword.form-control(type="password", name="currentPassword", value="", placeholder="Current Password", class="validate[required]")
+                                .col-xs-3 &nbsp;
+                            .row
+                                .col-xs-9
+                                    span.label-txt New password
+                                    input#newPassword.form-control(type="password", name="newPassword", value="", placeholder="Enter Password", class="validate[required]")
+                                .col-xs-3 &nbsp;
+                            .row(style="margin-bottom: 50px;")
+                                .col-xs-9
+                                    span.label-txt Confirm new password
+                                    input#confirmPassword.form-control(type="password", name="confirmPassword", value="", placeholder="Confirm Password", class="validate[required,equals[newPassword]]")
+                                .col-xs-3
+                                    button#update-password.btn.btn-default(type="button", data-id="") Apply
+                    .row.settings-row
+                        .col-xs-3.settings-coll-1
+                            .title-2 Manage Admins
+                        #id-setings-admins.col-xs-9.settings-coll-2(style="padding: 0 15px 0 0;")
+                            .row.users-row.header-row
+                                .col-xs-1.user-cell.text-center.sort-by-user-password Active
+                                .col-xs-2.user-cell.sort-by-name(data-id="firstName") First Name
+                                .col-xs-2.user-cell.sort-by-name(data-id="lastName") Last Name
+                                .col-xs-5.user-cell.sort-by-name(data-id="email") Email Address
+                                .col-xs-2.user-cell.text-center User Picture
+                            .content-users-list                                
+                    .row.settings-row
+                        .col-xs-3.settings-coll-1
+                            .title-2(style="color: #c40001;") Danger zone
+                        .col-xs-9.settings-coll-2
+                            .row
+                                .col-xs-12.danger-zone 
+                                    button#id-reset-eula.btn.btn-default(type="button") Reset EULA for Users
+                                    span This will make all users to accept new EULA when they login
+                            .row
+                                .col-xs-12.danger-zone(style="margin-bottom: 50px;")
+                                    button#id-upload-user-csv.btn.btn-default(type="button") Upload User CSV file
+                                    span Uploading CSV file will create users
+                #id-content-report.main-content
+                    .row.tab-buttons
+                        .col-xs-10
+                            form(onsubmit="return false;")
+                                label.col-sm-1.control-label From:
+                                .col-xs-2.sel-date-field
+                                    input.js-select-logs-startdate.form-control(type="text", value="")
+                                label.col-sm-1.control-label To:
+                                .col-xs-2.sel-date-field(style="padding-right: 30px;")
+                                    input.js-select-logs-enddate.form-control(type="text", value="")
+                                .col-xs-4.log-user-list(style="padding: 0;")
+                        .col-xs-2.text-right
+                            button.js-download-report.btn.btn-default(type="button") Export to Excel
+
+                    .row.users-row.header-row
+                        .col-xs-3.user-cell.sort-by-name(data-id="strCreated") Date/Time
+                            span.arrow-sort-dn
+                        .col-xs-3.user-cell.sort-by-name(data-id="email") User
+                            span.arrow-sort-dn
+                        .col-xs-6.user-cell.sort-by-name(data-id="email") Action
+                            span.arrow-sort-dn
+                    .content-logs-list
+
+        script#templateUsersListView(type="text/template")
+            <% _.each(data, function(model, key) { %>
+            .row.users-row(data-id!="<%- model.id %>")
+                .col-xs-2.user-cell <%- model.firstName || '' %>
+                .col-xs-2.user-cell <%- model.lastName || '' %>
+                .col-xs-3.user-cell <%- model.email || '' %>
+                .col-xs-1.user-cell <%- ({ARTIST: 'Artist', LEADER: 'Admin', ADMIN: 'Admin'})[model.role] || '' %>
+                .col-xs-1.user-cell.text-center
+                    <% if ( 'ACTIVE' === model.status ) { %>
+                    span.user-active
+                    <% } %>
+                .col-xs-1.user-cell.text-center
+                    <% if ( false === model.tempPassword ) { %>
+                    span.user-active
+                    <% } %>
+                .col-xs-2.user-cell.text-center
+                    img.user-icon(src!="<%- ( model.picInfo || {} ).url || ( 'images/assets/misc/profile_default.png?_=' + $.now() ) %>")
+                .row.tab-box.col-xs-12
+            <% }); %>
+            .col-xs-2.pagination-size
+                select
+                    option(value="5") 5
+                    option(value="10") 10
+                    option(value="20") 20
+                    option(value="50") 50
+                    option(value="100") 100
+                span.per-page Per Page
+            .col-xs-10.text-center(style="padding: 0px;")
+                nav
+                    ul.pagination
+
+        script#templateUserEditView(type="text/template")
+            .row
+            .row(style="margin: 10px 0px 10px 50px;")
+                .col-xs-4.pane-stats
+                    .user-stat-row.header-row
+                        .col-xs-2.user-stat-cell Section
+                        .col-xs-2.user-stat-cell.text-center Posts
+                        .col-xs-3.user-stat-cell.text-center Comments
+                        .col-xs-2.user-stat-cell.text-center Likes
+                        .col-xs-3.user-stat-cell.text-center Responses
+                    .user-stat-row
+                        .col-xs-2.user-stat-cell IDEA
+                        .col-xs-2.user-stat-cell.text-center <%- model.ideaPosted %>
+                        .col-xs-3.user-stat-cell.text-center <%- model.ideaComments %>
+                        .col-xs-2.user-stat-cell.text-center <%- model.ideaLikes %>
+                        .col-xs-3.user-stat-cell.text-center --
+                    .user-stat-row
+                        .col-xs-2.user-stat-cell Feedback
+                        .col-xs-2.user-stat-cell.text-center --
+                        .col-xs-3.user-stat-cell.text-center --
+                        .col-xs-2.user-stat-cell.text-center --
+                        .col-xs-3.user-stat-cell.text-center <%- model.feedbackResponses %>
+                    .user-stat-row
+                        .col-xs-2.user-stat-cell My Artistry
+                        .col-xs-2.user-stat-cell.text-center <%- model.artistryPosts %>
+                        .col-xs-3.user-stat-cell.text-center <%- model.artistryComments %>
+                        .col-xs-2.user-stat-cell.text-center <%- model.artistryLikes %>
+                        .col-xs-3.user-stat-cell.text-center --
+                    .user-stat-row
+                        .col-xs-2.user-stat-cell Eyes & Ears
+                        .col-xs-2.user-stat-cell.text-center <%- model.alertPosts %>
+                        .col-xs-3.user-stat-cell.text-center <%- model.alertComments %>
+                        .col-xs-2.user-stat-cell.text-center <%- model.alertLikes %>
+                        .col-xs-3.user-stat-cell.text-center --
+                .col-xs-8
+                    table.table.borderless
+                        <% for (var idx = 0; idx < userDetails.length; idx++) { %>
+                        tr
+                            td
+                                .td-cell <%- (userDetails[idx] || {}).name %>
+                            th(title!="<%- (userDetails[idx] || {}).value %>")
+                                .td-cell  <%- (userDetails[idx] || {}).value || '--' %>
+                            td
+                                .td-cell <%- (userDetails[++idx] || {}).name %>
+                            th(title!="<%- (userDetails[idx] || {}).value %>")
+                                .td-cell  <%- (userDetails[idx] || {}).value || '--' %>
+                        <% } %>
+            .col-xs-12.edit-user-footer
+                button.js-del-user.btn.btn-default.del-btn(type="button", data-id!="<%- model.id %>") Delete this user
+                button.js-edit-user.btn.btn-default.pull-right(type="button", data-id!="<%- model.id %>") Edit this user
+
+        script#templateGroupsView(type="text/template")
+            <% _.each(data, function(model, key) { %>
+            <% if ( 'Everyone' != model.name ) { %>
+            .row.groups-row(data-id!="<%- model.name %>")
+                .col-xs-2.group-cell <%- model.strCreated || 'N/A' %>
+                .col-xs-2.group-cell <%- model.name || 'N/A' %>
+                .col-xs-3.group-cell <%- model.descr || 'N/A' %>
+                .col-xs-3.group-cell
+                    img(src!="<%- ( ( model.author || {} ).picInfo || {} ).url || ( 'images/assets/misc/profile_default.png?_=' + $.now() ) %>")
+                    span <%- ( ( model.author || {} ).firstName || '' ) + ' ' + ( ( model.author || {} ).lastName || '' ) %>
+                .col-xs-2.group-cell
+                    button.js-add-new-member.btn.btn-default(type="button") + Members
+                .row.groups-box.col-xs-12
+            <% } %>
+            <% }); %>
+
+        script#templateGroupUsersView(type="text/template")
+            .row.groups-box-row-header
+                .col-xs-2 First Name
+                    span.arrow-sort
+                .col-xs-2 Last Name
+                .col-xs-6 Email Address
+                .col-xs-2
+            <% _.each(data, function(model, key) { %>
+            .row.groups-box-row
+                .col-xs-2 <%- model.firstName || 'N/A' %>
+                .col-xs-2 <%- model.lastName || 'N/A' %>
+                .col-xs-6 <%- model.email || 'N/A' %>
+                .col-xs-2.text-center
+                    img.icon-group-del(src="images/assets/misc/delete.png", data-id!="<%- model.id %>")
+            <% }); %>
+
+        script#templateAdminsListView(type="text/template")
+            <% _.each(data, function(model, key) { %>
+            .row.users-row(data-id!="<%- model.id %>")
+                .col-xs-1.user-cell.text-center
+                    span.user-checkbox(data-id!="<%- model.email %>", class!="<% if ( model.accessConsole ) {print('active');} %>")
+                .col-xs-2.user-cell <%- model.firstName || '' %>
+                .col-xs-2.user-cell <%- model.lastName || '' %>
+                .col-xs-5.user-cell <%- model.email || '' %>
+                .col-xs-2.user-cell.text-center
+                    img.user-icon(src!="<%- ( model.picInfo || {} ).url || ( 'images/assets/misc/profile_default.png?_=' + $.now() ) %>")
+            <% }); %>
+
+        script#templateAddMembersInGroupView(type="text/template")
+            <% _.each(data, function(model, key) { %>
+            <% if ( 0 === $('#id-content-groups .groups-row.active [data-id="' + model.id + '"]').length ) { %>
+            .row.add-user-to-group-box-row(data-id!="<%- model.id %>")
+                .col-xs-3.group-box-row-cell <%- model.firstName || 'N/A' %>
+                .col-xs-3.group-box-row-cell <%- model.lastName || 'N/A' %>
+                .col-xs-6.group-box-row-cell <%- model.email || 'N/A' %>
+            <% } %>
+            <% }); %>
+
+        script#templateDashboardUsersReportView(type="text/template")
+            .col-xs-5.text-left Total Registered:
+            .col-xs-7 <%- data.totalUsers %>
+            .col-xs-5.text-left Total Logged in:
+            .col-xs-7  <%- (data.totalUsers - data.totalNotTempUsers) %>
+            .col-xs-5.text-left Total Active:
+            .col-xs-7  <%- data.totalActiveUsers %>
+
+        script#templateDashboardPostingPercentagesView(type="text/template")
+            <% _.each(data, function(model, key) { %>
+            .row.tab-row
+                .col-xs-8.exp-col <%- model.type %>
+                .col-xs-4.exp-col <%- model.value %>
+            <% }); %>
+
+        #modal-add-new-user.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4.modal-title Add New User
+                    .modal-body.clearfix
+                        .row
+                            .col-xs-4.row-label User picture
+                            .col-xs-8.text-center.row-field
+                                img#add-user-pic(src="images/assets/misc/profile_default.png")
+                                img#add-user-sel-pic(src="images/assets/list_new_exp/btn_file_normal.png")
+                        .row
+                            .col-xs-4.row-label First Name
+                            .col-xs-8.row-field
+                                input#id-add-user-firstName.form-control(type="text", name="id-add-user-firstName", value="", class="validate[required]")
+                        .row
+                            .col-xs-4.row-label Last Name
+                            .col-xs-8.row-field
+                                input#id-add-user-lastName.form-control(type="text", name="id-add-user-lastName", value="", class="validate[required]")
+                        .row
+                            .col-xs-4.row-label Email Adress
+                            .col-xs-8.row-field
+                                input#id-add-user-email.form-control(type="text", name="id-add-user-email", value="", class="validate[required,custom[email]]")
+                        .row
+                            .col-xs-4.row-label Role
+                            .col-xs-8.row-field
+                                select#id-add-user-role
+                                    option(value="ARTIST") Artist
+                                    option(value="LEADER") Admin
+                        .row.pass-line
+                        .row
+                            .col-xs-4.row-label Password
+                            .col-xs-8.row-field
+                                input#id-add-user-password.form-control(type="password", name="id-add-user-password", value="")
+                        .row
+                            .col-xs-4.row-label Password again
+                            .col-xs-8.row-field
+                                input#id-add-user-passconfirm.form-control(type="password", name="id-add-user-passconfirm", value="", class="validate[equals[id-add-user-password]]")
+                        .row.pass-line
+                    .modal-footer
+                        .row
+                            button#modal-add-new-user-btn-cancel.btn.btn-default(data-dismiss="modal", style="margin-right: 20px;", type="button") Cancel
+                            button#modal-add-new-user-btn-add.btn.btn-default(aria-hidden="true", type="button") Add User
+
+
+        script#templateLogsListView(type="text/template")
+            <% _.each(data, function(model, key) { %>
+            .row.users-row(data-id!="<%- model.id %>")
+                .col-xs-3.user-cell <%- model.strCreated || '' %>
+                //.col-xs-3.user-cell <%- ( ( model.author || {} ).firstName || '' ) + ' ' + ( ( model.author || {} ).lastName || '' ) %>
+                .col-xs-3.user-cell <%- model.email %>
+                .col-xs-6.log-action-cell <%- model.message || '' %>
+                .row.tab-box.col-xs-12
+            <% }); %>
+            .col-xs-2.pagination-size
+                select
+                    option(value="10") 10
+                    option(value="20") 20
+                    option(value="50") 50
+                    option(value="100") 100
+                span.per-page Per Page
+            .col-xs-10.text-center(style="padding: 0px;")
+                nav
+                    ul.pagination
+
+        script#templateLogEditView(type="text/template")
+            .row
+
+        script#templateLogUsersView(type="text/template")
+            label.col-xs-4.control-label User
+            .col-xs-8
+                select#id-select-log-users(style="width: 100%;")
+                    option(value="") All Users
+                    <% _.each( data, function(model, key) { %> 
+                    option(value!="<%- model.id %>") <%- model.email %>
+                    <% }); %>
+
+        #modal-add-new-group.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4.modal-title Create New Group
+                    .modal-body.clearfix
+                        .row
+                            .col-xs-4.row-label Group Name
+                            .col-xs-8.row-field
+                                input#id-add-group-name.form-control(type="text", name="id-add-group-name", value="", class="validate[required]")
+                        .row
+                            .col-xs-4.row-label Description
+                            .col-xs-8.row-field
+                                textarea#id-add-group-descr.form-control(name="id-add-group-desc")
+                    .modal-footer
+                        .row
+                            button#modal-add-new-group-btn-cancel.btn.btn-default(data-dismiss="modal", style="margin-right: 20px;", type="button") Cancel
+                            button#modal-add-new-group-btn-add.btn.btn-default(aria-hidden="true", type="button") Create Group
+                        .row.text-center.modal-row-delete-group
+                            button#modal-add-new-group-btn-delete.btn.btn-default.btn-delete(data-dismiss="modal", type="button") Delete Group
+
+        #modal-add-user-to-group.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4.modal-title Add Member
+                    .modal-body.clearfix
+                        .row
+                            .col-xs-9.row-field
+                                span.icon-search
+                                input#modal-search-users.form-control(type="text", name="modal-search-users", value="", placeholder="Enter Member Name")
+                            .col-xs-3.row-label
+                                button#modal-search-users-btn-search.btn.btn-default(type="button") Search
+                        .row.add-user-to-group-grid-header
+                            .col-xs-3 First Name
+                                span.arrow-sort
+                            .col-xs-3 Last Name
+                            .col-xs-6 Email Address                            
+                        .row.add-user-to-group-box
+                            .col-xs-12
+                    .modal-footer
+                        button#modal-add-user-to-group-btn-cancel.btn.btn-default(data-dismiss="modal", style="margin-right: 20px;", type="button") Close
+                        button#modal-add-user-to-group-btn-add.btn.btn-default(aria-hidden="true", type="button") Add User
+
+        #modal-delete-users.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
+            .modal-dialog
+                .modal-content
+                    .modal-header.text-center
+                        h4.modal-title.text-center Delete User
+                    .modal-body.clearfix
+                        p.text-center You are about to delete your selected user. 
+                        p.text-center Are you sure you want to do this?
+                        p.text-center This action <b>CAN NOT</b> be undone.
+                    .modal-footer.text-center
+                        button#modal-delete-users-btn-cancel.btn.btn-default(data-dismiss="modal", style="margin-right: 80px;", type="button") Cancel
+                        button#modal-delete-users-btn-delete.btn.btn-default(aria-hidden="true", type="button") Yes, Delete
+
+        #modal-remove-group-user.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
+            .modal-dialog
+                .modal-content
+                    .modal-header.text-center
+                        h4.modal-title.text-center Remove User
+                    .modal-body.clearfix
+                        p.text-center You are about to remove this user from this group. 
+                        p.text-center Are you sure you want to do this?
+                        p.text-center This action <b>CAN NOT</b> be undone.
+                    .modal-footer.text-center
+                        button#modal-remove-group-user-btn-cancel.btn.btn-default(data-dismiss="modal", style="margin-right: 80px;", type="button") Cancel
+                        button#modal-remove-group-user-btn-remove.btn.btn-default(aria-hidden="true", type="button") Yes, Remove
+        
+        #modal-delete-group.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
+            .modal-dialog
+                .modal-content
+                    .modal-header.text-center
+                        h4.modal-title.text-center Delete Selected Group
+                    .modal-body.clearfix
+                        p.text-center You are about to delete the selected group. 
+                        p.text-center Are you sure you want to do this?
+                        p.text-center This action <b>CAN NOT</b> be undone.
+                    .modal-footer.text-center
+                        button#modal-delete-group-btn-cancel.btn.btn-default(data-dismiss="modal", style="margin-right: 80px;", type="button") Cancel
+                        button#modal-delete-group-btn-delete.btn.btn-default(aria-hidden="true", type="button") Yes, Delete
+
+        #confirm-alert.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4#confirm-alert-label.modal-title are you sure?
+                    .modal-body.clearfix
+                    .modal-footer
+                        button.btn.btn-default.yes(data-dismiss="modal", style="margin-right: 20px;", type="button") Confirm
+                        button.btn.btn-default.no(data-dismiss="modal", aria-hidden="true", type="button") Cancel
+
+        #error-alert.modal.fade
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4.modal-title Error
+                    .modal-body.clearfix
+                        p 
+                    .modal-footer
+                        button.btn.btn-default.no(data-dismiss="modal", type="button") Ok
+
+        #general-alert.modal.fade
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4.modal-title 
+                    .modal-body.clearfix
+                        p
+                    .modal-footer
+                        button.btn.btn-default.no(data-dismiss="modal", type="button") Ok
+
+        #modal-select-starting-date.modal.fade
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                        h4.modal-title Please select a starting date for generating Excel report
+                    .modal-body.clearfix
+                        .col-xs-12.text-center
+                            input.js-select-startdate.input-in-datepicker.form-control(type="text", value="")
+                    .modal-footer
+                        button.btn.btn-default.no(data-dismiss="modal", style="margin-right: 50px;", aria-hidden="true", type="button") Cancel
+                        button.btn.btn-default.btn-ok(data-dismiss="modal", type="button") Export
+
+        form(enctype="multipart/form-data", method="post", style="display: none; width: 0; height: 0;", onsubmit="return false;")
+            input#topicIcon(type="file", name="topicIcon", style="display: none;")
+            input#expImage(type="file", name="expImage", style="display: none;")
+            input#userPicture(type="file", name="userPicture", style="display: none;")
+            input#macideasImage(type="file", name="macideasImage", style="display: none;")
+            input#feedbackImage(type="file", name="macideasImage", style="display: none;")
+            input#alertsImage(type="file", name="macideasImage", style="display: none;")
+            input#myartistryImage(type="file", name="macideasImage", style="display: none;")
+            input#userCSV(type="file", name="userCSV", style="display: none;")
+
+        iframe#downloadFrame(width="0", height="0", name="downloadFrame", style="display: none;")
+
+        script(data-main="js/desktop" src="js/libs/require.js")

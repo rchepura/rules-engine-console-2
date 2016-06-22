@@ -98,40 +98,39 @@ block content
                 .main-content.container
                     .row.tab-buttons
                         .col-xs-3
-                            button#id-new-rule.btn.btn-default.add-rule(type="button") + New
+                            button#id-new-group.btn.btn-default.add-rule(type="button") + New
                         .col-xs-6
                             form(onsubmit="return false;")
                                 .col-xs-8.row-field(style="padding: 0;")
                                     span.icon-search
-                                    input#id-search-rule.form-control(type="text", name="modal-search-users", value="", placeholder="Search by Iapprove name")
+                                    input#id-search-groups.form-control(type="text", name="modal-search-users", value="", placeholder="Search Groups")
                                     span.icon-search-reset x
                                 .col-xs-4.row-label
-                                    button#id-search-rule-btn-search.btn.btn-default(type="submit") Search
+                                    button#id-search-groups-btn-search.btn.btn-default(type="submit") Search
                         .col-xs-3 &nbsp;
                     .tab-header-row.container
                         .col-xs-2.head-text Date Added
-                        .col-xs-3.head-text Iapprove Name
-                        .col-xs-4.head-text Description
-                        .col-xs-3.head-text Action to perform
+                        .col-xs-3.head-text Group Name
+                        .col-xs-7.head-text Description
                     .content-rule-list.container
 
             #id-content-configuration.main-contents-container
                 .main-content.container
                     .row.tab-buttons
                         .col-xs-3
-                            //button#id-new-user.btn.btn-default.add-user(type="button") + New
+                            //button#id-new-configuration.btn.btn-default.add-user(type="button") + New
                         .col-xs-6
                             form(onsubmit="return false;")
                                 .col-xs-8.row-field(style="padding: 0;")
                                     span.icon-search
-                                    input#id-search-user.form-control(type="text", name="modal-search-users", value="", placeholder="Search by User name")
+                                    input#id-search-configuration.form-control(type="text", name="modal-search-users", value="", placeholder="Search")
                                     span.icon-search-reset x
                                 .col-xs-4.row-label
-                                    button#id-search-user-btn-search.btn.btn-default(type="submit") Search
+                                    button#id-search-configuration-btn-search.btn.btn-default(type="submit") Search
                         .col-xs-3 &nbsp;
                     .tab-header-row.container
                         .col-xs-2.head-text Date Added
-                        .col-xs-3.head-text User Name
+                        .col-xs-3.head-text Name
                         .col-xs-7.head-text Description
                     .content-user-list.container
 
@@ -139,300 +138,21 @@ block content
                 .main-content.container
                     .row.tab-buttons
                         .col-xs-3
-                            //button#id-new-user.btn.btn-default.add-user(type="button") + New
+                            //button#id-new-report.btn.btn-default.add-user(type="button") + New
                         .col-xs-6
                             form(onsubmit="return false;")
                                 .col-xs-8.row-field(style="padding: 0;")
                                     span.icon-search
-                                    input#id-search-user.form-control(type="text", name="modal-search-users", value="", placeholder="Search by User name")
+                                    input#id-search-report.form-control(type="text", name="modal-search-users", value="", placeholder="Search")
                                     span.icon-search-reset x
                                 .col-xs-4.row-label
-                                    button#id-search-user-btn-search.btn.btn-default(type="submit") Search
+                                    button#id-search-report-btn-search.btn.btn-default(type="submit") Search
                         .col-xs-3 &nbsp;
                     .tab-header-row.container
                         .col-xs-2.head-text Date Added
                         .col-xs-3.head-text User Name
                         .col-xs-7.head-text Description
                     .content-user-list.container
-
-        script#templateIapproveRowView(type="text/template")
-            <% _.each(data, function(model, key) { %>
-            .row.tab-row(did!="<%- model.hotpotCardsIapproveId %>")
-                .col-xs-2.exp-col <%- model.strTimeCreated || 'N/A' %>
-                .col-xs-3.exp-col.exp-col-edit
-                    input.js-rule-title.form-control(type="text", value!="<%- model.ruleName || '' %>", class="validate[required]")
-                .col-xs-3.exp-col.exp-col-read <%- model.ruleName %>
-                .col-xs-4.exp-col.exp-col-edit
-                    input.js-rule-description.form-control(type="text", value!="<%- model.description || '' %>")
-                .col-xs-4.exp-col.exp-col-read <%- model.description %>
-                .col-xs-2.exp-col <%- (model.action || {}).actionTemplateName || '' %>
-                .col-xs-1.exp-col.tab-row-collaps.text-right
-                    span.arrow-expand
-                .row.tab-box.col-xs-12
-            <% }); %>
-
-        script#templateUserRowView(type="text/template")
-            <% _.each(data, function(model, key) { %>
-            .row.tab-row(did!="<%- model.hotpotCardsIapproveId %>")
-                .col-xs-2.exp-col <%- model.strTimeCreated || 'N/A' %>
-                .col-xs-3.exp-col.exp-col-edit
-                    input.js-user-title.form-control(type="text", value!="<%- model.userName || '' %>", class="validate[required]")
-                .col-xs-3.exp-col.exp-col-read <%- model.userName %>
-                .col-xs-4.exp-col.exp-col-edit
-                    input.js-user-description.form-control(type="text", value!="<%- model.description || '' %>")
-                .col-xs-6.exp-col.exp-col-read <%- model.description %>
-                .col-xs-1.exp-col.tab-row-collaps.text-right
-                    span.arrow-expand
-                .row.tab-box.col-xs-12
-            <% }); %>
-
-        script#templateKeyDevicesView(type="text/template")
-            <% _.each((model.capability || {}), function(v, k) { %>
-            tr
-                td(style="width: 120px;") 
-                    span <%- (k || 'N/A') %>
-                td(style="width: 120px;") 
-                    span <%- v %>
-                td 
-                    span = 
-                    input.form-control(type="text", value!="<%- capabilityCondition[k] || '' %>")
-            <% }); %>
-
-        script#templateIapproveDetailsView(type="text/template")
-            .col-xs-12.hor-line
-            .col-xs-11
-                .col-xs-12.rule-details-row
-                    .col-xs-4 From Device
-                    .col-xs-4
-                        select.form-control(name="device")
-                            <% _.each( (model.devices || {}), function(m, k) { %>
-                            <% if ( -1 !== (model.conditionJexl || '').indexOf(m.name) ) { %>
-                            option(value!="<%- k %>", selected="selected") <%- m.name || 'N/A' %>
-                            <% } else { %>
-                            option(value!="<%- k %>") <%- m.name || 'N/A' %>
-                            <% } %>
-                            <% }); %>
-                    .col-xs-4
-                .col-xs-12.rule-details-row
-                    .col-xs-4 Check Conditions
-                    .col-xs-8
-                        table.table
-                            tr
-                                th(style="width: 120px;") Key name
-                                th(style="width: 120px;") Value type
-                                th(style="padding-left: 30px;") Key Value condition
-                        table.table.table-bordered.table-device-type
-                            <% _.each(['boolean', 'string', 'number', 'array'], function(v, k) { %>
-                            tr
-                                td(style="width: 120px;") 
-                                    span Key <%- (k + 1) %>
-                                td(style="width: 120px;") 
-                                    span <%- v %>
-                                td 
-                                    span = 
-                                    input.form-control(type="text", value="")
-                            <% }); %>
-                .col-xs-12.rule-details-row
-                    .col-xs-3 Iapprove check
-                    .col-xs-1 Start
-                    .col-xs-2
-                        select.form-control(name="start-hour")
-                            <% _.each(_.range(0, 13), function(v, k) { %>
-                            <% if ( v == timeCondition.startHour ) { %>
-                            option(selected="selected") <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } else { %>
-                            option <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } %>
-                            <% }); %>
-                    .col-xs-2
-                        select.form-control(name="start-min")
-                            <% _.each(_.range(0, 60), function(v, k) { %>
-                            <% if ( v == timeCondition.startMin ) { %>
-                            option(selected="selected") <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } else { %>
-                            option <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } %>
-                            <% }); %>
-                    .col-xs-2
-                        select.form-control(name="start-am-pm")
-                            <% if ( timeCondition.startHourPM ) { %>
-                            option AM
-                            option(selected="selected") PM
-                            <% } else { %>
-                            option(selected="selected") AM
-                            option PM
-                            <% } %>
-                    .col-xs-2
-                    .col-xs-3
-                    .col-xs-9.hor-line
-                    .col-xs-3
-                    .col-xs-1 End
-                    .col-xs-2
-                        select.form-control(name="end-hour")
-                            <% _.each(_.range(0, 13), function(v, k) { %>
-                            <% if ( v == timeCondition.endHour ) { %>
-                            option(selected="selected") <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } else { %>
-                            option <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } %>
-                            <% }); %>
-                    .col-xs-2
-                        select.form-control(name="end-min")
-                            <% _.each(_.range(0, 60), function(v, k) { %>
-                            <% if ( v == timeCondition.endMin ) { %>
-                            option(selected="selected") <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } else { %>
-                            option <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } %>
-                            <% }); %>
-                    .col-xs-2
-                        select.form-control(name="end-am-pm")
-                            <% if ( timeCondition.endHourPM ) { %>
-                            option AM
-                            option(selected="selected") PM
-                            <% } else { %>
-                            option(selected="selected") AM
-                            option PM
-                            <% } %>
-                    .col-xs-2
-                .col-xs-12.rule-details-row
-                    .col-xs-4 Action perform
-                    .col-xs-4
-                        select.form-control(name="action")
-                            <% _.each( (model.actions || {}), function(m, k) { %>
-                            <% if ( m.actionTemplateName == (model.action || {}).actionTemplateName ) { %>
-                            option(value!="<%- k %>", selected="selected") <%- m.actionTemplateName || 'N/A' %>
-                            <% } else { %>
-                            option(value!="<%- k %>") <%- m.actionTemplateName %>
-                            <% } %>
-                            <% }); %>
-                    .col-xs-4
-            .col-xs-1
-            .col-xs-12.exp-footer
-                button.js-del-rule.btn.btn-default.del-btn(type="button", did!="<%- model.hotpotCardsIapproveId %>") Delete this rule
-                button.js-cancel.btn.btn-default.pull-right(type="button") Cancel
-                button.js-save-rule.btn.btn-default.pull-right(type="button", did!="<%- model.hotpotCardsIapproveId %>") Save
-            
-        script#templateActionRowView(type="text/template")
-            <% _.each(data, function(model, key) { %>
-            .row.tab-row(did!="<%- model.actionTemplateId || '' %>")
-                .col-xs-2.exp-col <%- model.strTimeCreated || 'N/A' %>
-                .col-xs-3.exp-col.exp-col-edit
-                    input.js-action-title.form-control(type="text", value!="<%- model.actionTemplateName || '' %>", class="validate[required]")
-                .col-xs-3.exp-col.exp-col-read <%- model.actionTemplateName %>
-                .col-xs-6.exp-col.exp-col-edit
-                    input.js-action-description.form-control(type="text", value!="<%- model.actionTemplateDescription || '' %>")
-                .col-xs-6.exp-col.exp-col-read <%- model.actionTemplateDescription %>
-                .col-xs-1.exp-col.tab-row-collaps.text-right
-                    span.arrow-expand
-                .row.tab-box.col-xs-12
-            <% }); %>
-
-        script#templateActionDetailsView(type="text/template")
-            .col-xs-12.hor-line
-            .col-xs-12
-                h4 Action to Perform
-            .col-xs-1
-            .col-xs-11
-                .col-xs-12.action-details-row
-                    .col-xs-4 Recommended Device Card
-                    .col-xs-4
-                        select.form-control(name="device-card")
-                            option(value='none') none
-                            <% _.each( (model.devices || {}), function(m, k) { %>
-                            <% if ( m.name == (model.deviceType || {}).name ) { %>
-                            option(value!="<%- k %>", selected="selected") <%- m.name || 'N/A' %>
-                            <% } else { %>
-                            option(value!="<%- k %>") <%- m.name || 'N/A' %>
-                            <% } %>
-                            <% }); %>
-                    .col-xs-4
-                .col-xs-12.action-details-row
-                    .col-xs-4 Send Push Notification
-                    .col-xs-4
-                        span.check-box(did="#templateActionNotificationView")
-                    .col-xs-4
-                    .col-xs-12.ext-box
-                .col-xs-12.action-details-row
-                    .col-xs-4 Send Email
-                    .col-xs-4
-                        span.check-box(did="#templateActionSendEmailView")
-                    .col-xs-4
-                    .col-xs-12.ext-box
-                .col-xs-12.action-details-row
-                    .col-xs-3.middle-text Expire action in
-                    .col-xs-1.padding-none.text-right.middle-text # of days
-                    .col-xs-2.middle-text
-                        select.form-control(name="num-of-days")
-                            <% _.each(_.range(0, 32), function(v, k) { %>
-                            <% if ( v == model.expirationDays ) { %>
-                            option(selected="selected") <%- v %>
-                            <% } else { %>
-                            option <%- v %>
-                            <% } %>
-                            <% }); %>
-                    .col-xs-6.middle-text day(s)
-                    .col-xs-3
-                    .col-xs-9.hor-line
-                    .col-xs-3
-                    .col-xs-1.padding-none.text-right.middle-text at time
-                    .col-xs-2
-                        select.form-control(name="at-time-hour")
-                            <% _.each(_.range(0, 13), function(v, k) { %>
-                            <% if ( v == (model.expirationHour%12) ) { %>
-                            option(selected="selected") <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } else { %>
-                            option <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } %>
-                            <% }); %>
-                    .col-xs-2
-                        select.form-control(name="at-time-min")
-                            <% _.each(_.range(0, 60), function(v, k) { %>
-                            <% if ( v == model.expirationMin ) { %>
-                            option(selected="selected") <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } else { %>
-                            option <% print( (v < 10 ? '0' : '') + v ) %>
-                            <% } %>
-                            <% }); %>
-                    .col-xs-2
-                        select.form-control(name="at-time-am-pm")
-                            <% if ( model.expirationHour && 12 < model.expirationHour ) { %>
-                            option AM
-                            option(selected="selected") PM
-                            <% } else { %>
-                            option(selected="selected") AM
-                            option PM
-                            <% } %>
-                    .col-xs-2
-                .col-xs-12.action-details-row
-                    .col-xs-4 API call
-                    .col-xs-4
-                        input.form-control(type="text", name="api-call", value!="<%- model.apiUrl || '' %>", class="validate[required]", placeholder="API Url")
-                    .col-xs-4
-            .col-xs-12.exp-footer
-                button.js-del-action.btn.btn-default.del-btn(type="button", did!="<%- model.actionTemplateId %>") Delete this action
-                button.js-cancel.btn.btn-default.pull-right(type="button") Cancel
-                button.js-save-action.btn.btn-default.pull-right(type="button", did!="<%- model.actionTemplateId %>") Save
-
-        script#templateActionNotificationView(type="text/template")
-            .col-xs-4 Text to display:
-            .col-xs-7
-                input.form-control(type="text", name="text-to-display", value!="<%- data.pushPayload || '' %>", class="validate[required]", placeholder="Notification text")
-            .col-xs-1
-
-        script#templateActionSendEmailView(type="text/template")
-            .col-xs-4 Recipient email:
-            .col-xs-7
-                input.form-control(type="text", name="recipient-email", value!="<%- data.emailRecipient || '' %>", class="validate[required]", placeholder="Email Address")
-            .col-xs-1
-            .col-xs-4 Subject:
-            .col-xs-7
-                input.form-control(type="text", name="email-subject", value!="<%- data.emailSubject || '' %>", class="validate[required]", placeholder="Subject")
-            .col-xs-1
-            .col-xs-4 Body:
-            .col-xs-7
-                input.form-control(type="text", name="email-body", value!="<%- data.emailContents || '' %>", class="validate[required]", placeholder="Body")
-            .col-xs-1
 
         #confirm-alert.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
             .modal-dialog

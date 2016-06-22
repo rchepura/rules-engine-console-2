@@ -1,0 +1,32 @@
+.row.text-center
+    h4 Users Report
+.row.dash-graph-row
+    .col-xs-12.dashboard-graph-box
+        #user-report
+    .row.dashboard-table-box
+        .content-dashboard-users-report-list.legend-box.clearfix
+.row.row-separator
+.row.text-center
+    h4 Posting Percentages
+.row.dash-graph-row
+    .col-xs-12.dashboard-graph-box
+        #posting-percentages-report
+    .row.dashboard-table-box
+        .content-dashboard-users-by-region-list.legend-box.clearfix
+.row.row-separator
+
+script#templateDashboardUsersReportView(type="text/template")
+    .col-xs-7.text-left Total Registered:
+    .col-xs-5.text-center <%- data.totalUsers %>
+    .col-xs-7.text-left Total Logged in:
+    .col-xs-5.text-center  <%- data.totalNotTempUsers %>
+    .col-xs-7.text-left Total Active:
+    .col-xs-5.text-center  <%- data.totalActiveUsers %>
+
+script#templateDashboardPostingPercentagesView(type="text/template")
+    <% _.each(data, function(model, key) { %>
+    .col-xs-8.text-left
+        span.rect-label(style!="background-color:<%- model.color %>")
+        | <%- model.type %>:
+    .col-xs-4.text-center <%- model.value %>%
+    <% }); %>

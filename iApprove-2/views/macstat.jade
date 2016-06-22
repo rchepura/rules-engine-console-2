@@ -1,0 +1,20 @@
+doctype html
+html
+    head
+        title= title
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel='stylesheet', href='css/bootstrap.min.css')
+        link(rel='stylesheet', href='css/macstat.css')
+        script(type="text/javascript", charset="utf-8", src="//www.gstatic.com/charts/loader.js")
+        script(type="text/javascript", charset="utf-8", src="js/libs/spin.min.js")
+        script(type="text/javascript", charset="utf-8", src="js/libs/utils.js")
+
+
+body
+    #id-dashboard
+        .analytics-dashboard-content
+    input(type="hidden", id="id-token", value="#{token}")
+
+
+
+    script(data-main="js/macstat" src="js/libs/require.js")

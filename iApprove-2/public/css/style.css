@@ -115,6 +115,17 @@ nav ul.pagination li.dots span {
   cursor: pointer;
   color: #fff;
 }
+.estee-header .icon-settings {
+  background-color: transparent;
+  background-image: url("/images/assets/icon_settings.png");
+  background-position: 50% center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+  height: 85px;
+  line-height: 85px;
+  width: 20px;
+}
 /* ******** Super Admin Page Start ******** */
 .super-admin-header {
   background: #def2f4;
@@ -127,6 +138,11 @@ nav ul.pagination li.dots span {
 }
 .super-admin-header #id-estee-signout {
   color: #50afb4;
+}
+.super-admin-header span {
+  color: #50afb4;
+  font-size: 20px;
+  line-height: 82px;
 }
 .clients-pane-icons {
   margin-top: 20px;

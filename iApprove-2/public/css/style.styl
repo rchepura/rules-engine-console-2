@@ -77,7 +77,7 @@ nav {
 }
 
 .modal-backdrop {
-    background-color: #fff;
+    /*background-color: #fff;*/
 }
 
 #confirm-alert {
@@ -1294,6 +1294,48 @@ nav {
         width: 230px;
         height: 75px;
         padding: 5px 10px;
+    }
+}
+#modal-add-new-client {
+    .modal-dialog {
+        width: 962px;
+    }
+    .modal-body {
+        padding: 10px 50px;
+    }
+    .row-label {
+        color: #9d9d9d;
+        font-size: 15px;
+        line-height: 36px;
+        padding: 10px 5px;
+        white-space: nowrap;
+    }
+    .row-field {
+        padding: 10px 5px;
+        input,  select {
+            height: 36px;
+            width: 100%;
+            border: 2px solid #E9E9E9;
+        }
+        input.js-app-icon, input.js-client-background {
+            background-image: none; 
+            background-position: 90% 50%; 
+            background-repeat: no-repeat; 
+            background-size: 20px 20px;
+            cursor: default;
+        }
+        input#id-app-icon, input#id-background {
+            border: none;
+            height: 0;
+            padding: 0;
+        }
+    }
+    .row.pass-line {
+        border-top: 1px solid #bdcdd5;
+        margin: 15px 0 5px;
+    }
+    span.asterisk-red {
+        color: red;
     }
 }
 .modal-footer {

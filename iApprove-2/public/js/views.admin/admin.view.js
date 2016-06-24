@@ -30,33 +30,94 @@ define(['jquery', 'backbone', 'moment'], function($, Backbone, Moment) {
                 } else {
                     Util.maxImageSize(file, maxIconWidth, maxIconHeight, function(correctIconSize) {
                         
-                        if ( !correctIconSize ) {
-                            Alerts.Error.display({
-                                title: 'Error',
-                                content: 'Please select an image file with dimensions of less than or equal to ' + maxIconWidth + 'px' + ' x ' + maxIconHeight + 'px.'
-                            });
-                            return;
-                        }
+//                        if ( !correctIconSize ) {
+//                            Alerts.Error.display({
+//                                title: 'Error',
+//                                content: 'Please select an image file with dimensions of less than or equal to ' + maxIconWidth + 'px' + ' x ' + maxIconHeight + 'px.'
+//                            });
+//                            return;
+//                        }
                         
                         me.doUploadPreview(file, function (iconURL) {
-                           
+                           if ( me.currUploadPic ) {
+                                switch ( me.currUploadPic ) {
+                                    case 'clientIcon':
+                                        me.$el.find('input#id-app-icon').val(iconURL);
+                                        me.$el.find('input.js-app-icon').css('background-image', 'url(' + iconURL + ')');
+                                        break;
+                                    case 'clientBackground':
+                                        me.$el.find('input#id-background').val(iconURL);
+                                        me.$el.find('input.js-client-background').css('background-image', 'url(' + iconURL + ')');
+                                        break;
+                                    default : ;
+                                }
+                           }
                         });
                     });
                 }
             });
         },
         events: {
-            'click #id-client-icon': "clientIcon",
+            'click #id-client-icon': "newClient",
+            'click .js-modal-add-new-client-btn': "createNewClient",
+            'click .js-app-icon': "clientIcon",
+            'click .js-client-background': "clientBackground"
         },
         init: function() {
             var me = this;
             me.hideLoader();
         },
-        clientIcon: function (e) {
+        newClient: function (e) {
             var me = this;
 
-            me.doUploadPreview.defaultUserIcon = true;
+            $('#modal-add-new-client').modal('show');
+        },
+        createNewClient: function (e) {
+            var me = this,
+                clientData = {},
+                pFields = $('#modal-add-new-client input, #modal-add-new-client select'),
+                isValid = true;
+              
+            pFields.each(function () {
+                var curID = ($(this).attr('id') || '').replace('id-', '');
+                
+                if ( curID && '' !== curID ) {
 
+                    $(this).val($.trim($(this).val()));
+                    if ( !isValid || !$(this).validationEngine('validate') ) {
+                        isValid = false;
+                        return;
+                    }
+                    clientData[curID] = $(this).val();
+                }
+            });
+
+            if ( !isValid || ( _.isEmpty(clientData) ) ) {
+                return;
+            }
+            
+            Alerts.Error.display({
+                title: 'Client Info',
+                content: (function () {
+                    var res = '';
+                    
+                    _.each(clientData, function(m, i) {
+                        res += i + ': ' + m + '<br>';
+                    });
+                    
+                    return res;
+                })()
+            });
+            
+        },
+        clientIcon: function (e) {
+            var me = this;
+            me.currUploadPic = 'clientIcon';
+            $('input#topicIcon').val('').click();
+        },
+        clientBackground: function (e) {
+            var me = this;
+            me.currUploadPic = 'clientBackground';
             $('input#topicIcon').val('').click();
         },
         doUploadPreview: function (file, callback) {

@@ -80,82 +80,90 @@ block content
                                 img(src="images/assets/client-list/add-new.png")
                             div
 
-        #modal-add-new-user.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
-            .modal-dialog
-                .modal-content
-                    .modal-header
-                        h4.modal-title Add New User
-                    .modal-body.clearfix
-                        .row
-                            .col-xs-4.row-label User picture
-                            .col-xs-8.text-center.row-field
-                                img#add-user-pic(src="images/assets/misc/profile_default.png")
-                                img#add-user-sel-pic(src="images/assets/list_new_exp/btn_file_normal.png")
-                        .row
-                            .col-xs-4.row-label First Name
-                            .col-xs-8.row-field
-                                input#id-add-user-firstName.form-control(type="text", name="id-add-user-firstName", value="", class="validate[required]")
-                        .row
-                            .col-xs-4.row-label Last Name
-                            .col-xs-8.row-field
-                                input#id-add-user-lastName.form-control(type="text", name="id-add-user-lastName", value="", class="validate[required]")
-                        .row
-                            .col-xs-4.row-label Email Adress
-                            .col-xs-8.row-field
-                                input#id-add-user-email.form-control(type="text", name="id-add-user-email", value="", class="validate[required,custom[email]]")
-                        .row
-                            .col-xs-4.row-label Role
-                            .col-xs-8.row-field
-                                select#id-add-user-role
-                                    option(value="ARTIST") Artist
-                                    option(value="LEADER") Admin
-                        .row.pass-line
-                        .row
-                            .col-xs-4.row-label Password
-                            .col-xs-8.row-field
-                                input#id-add-user-password.form-control(type="password", name="id-add-user-password", value="")
-                        .row
-                            .col-xs-4.row-label Password again
-                            .col-xs-8.row-field
-                                input#id-add-user-passconfirm.form-control(type="password", name="id-add-user-passconfirm", value="", class="validate[equals[id-add-user-password]]")
-                        .row.pass-line
-                    .modal-footer
-                        .row
-                            button#modal-add-new-user-btn-cancel.btn.btn-default(data-dismiss="modal", style="margin-right: 20px;", type="button") Cancel
-                            button#modal-add-new-user-btn-add.btn.btn-default(aria-hidden="true", type="button") Add User
+            #modal-add-new-client.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h4.modal-title New Client
+                        .modal-body.clearfix
+                            .row.pass-line
+                            .row
+                                .col-xs-3.row-label
+                                    h4 Basic information
+                                .col-xs-9
+                                    .row
+                                        .col-xs-3.row-label.text-right App Icon<span class="asterisk-red">*</span>
+                                        .col-xs-3.text-center.row-field
+                                            input.js-app-icon.form-control(type="text", value="", placeholder="Choose File...")
+                                            input#id-app-icon.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-3.row-label.text-right Background
+                                        .col-xs-3.text-center.row-field
+                                            input.js-client-background.form-control(type="text", value="", placeholder="Choose File...")
+                                            input#id-background.form-control(type="text", value="", class="validate[required]")
+                                    .row
+                                        .col-xs-3.row-label.text-right Client ID<span class="asterisk-red">*</span>
+                                        .col-xs-3.text-center.row-field
+                                            input#id-client-id.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-2.row-label.text-right Client Name<span class="asterisk-red">*</span>
+                                        .col-xs-4.text-center.row-field
+                                            input#id-client-name.form-control(type="text", value="", class="validate[required]")
+                                    .row
+                                        .col-xs-3.row-label.text-right Client URL<span class="asterisk-red">*</span>
+                                        .col-xs-9.text-center.row-field
+                                            input#id-client-url.form-control(type="text", value="", class="validate[required]")
+                            .row.pass-line
+                            .row
+                                .col-xs-3.row-label
+                                    h4 Contact information
+                                .col-xs-9
+                                    .row
+                                        .col-xs-3.row-label.text-right First Name<span class="asterisk-red">*</span>
+                                        .col-xs-3.text-center.row-field
+                                            input#id-firstname.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-2.row-label.text-right Last Name<span class="asterisk-red">*</span>
+                                        .col-xs-4.text-center.row-field
+                                            input#id-lastname.form-control(type="text", value="", class="validate[required]")
+                                    .row
+                                        .col-xs-3.row-label.text-right Email Address<span class="asterisk-red">*</span>
+                                        .col-xs-9.text-center.row-field
+                                            input#id-email.form-control(type="text", value="", class="validate[required,custom[email]]")
+                                    .row
+                                        .col-xs-3.row-label.text-right Company<span class="asterisk-red">*</span>
+                                        .col-xs-5.text-center.row-field
+                                            input#id-company.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-4
+                                    .row
+                                        .col-xs-3.row-label.text-right City<span class="asterisk-red">*</span>
+                                        .col-xs-3.text-center.row-field
+                                            input#id-city.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-1.row-label.text-right State<span class="asterisk-red">*</span>
+                                        .col-xs-2.text-center.row-field
+                                            input#id-state.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-1.row-label.text-right Zip<span class="asterisk-red">*</span>
+                                        .col-xs-2.text-center.row-field
+                                            input#id-zip.form-control(type="text", value="", class="validate[required]")
+                                    .row
+                                        .col-xs-3.row-label.text-right Assigned Group<span class="asterisk-red">*</span>
+                                        .col-xs-3.text-center.row-field
+                                            select#id-group
+                                                option(value="Admin") Admin
+                                        .col-xs-6
+                            .row.pass-line
+                            .row
+                                .col-xs-3.row-label
+                                    h4 Oauth information
+                                .col-xs-9
+                                    .row
+                                        .col-xs-3.row-label.text-right Oauth Client ID
+                                        #id-oauth-client-id.col-xs-9.row-label 93bd5920-6e3b-4cda-b444-dd1f0991dc42
+                                        .col-xs-3.row-label.text-right Oauth Client Secret
+                                        #id-oauth-client-secret.col-xs-9.row-label QYnhZ7A_Ee247xSYrKNL_G4j__r4UfUp5QKWMfKtnkw
+                            .row.pass-line
+                        .modal-footer
+                            .row
+                                button.js-modal-btn-cancel.btn.btn-default(data-dismiss="modal", style="margin-right: 20px;", type="button") Cancel
+                                button.js-modal-add-new-client-btn.btn.btn-default(aria-hidden="true", type="button") Create New Client
 
-
-        script#templateLogsListView(type="text/template")
-            <% _.each(data, function(model, key) { %>
-            .row.users-row(data-id!="<%- model.id %>")
-                .col-xs-3.user-cell <%- model.strCreated || '' %>
-                //.col-xs-3.user-cell <%- ( ( model.author || {} ).firstName || '' ) + ' ' + ( ( model.author || {} ).lastName || '' ) %>
-                .col-xs-3.user-cell <%- model.email %>
-                .col-xs-6.log-action-cell <%- model.message || '' %>
-                .row.tab-box.col-xs-12
-            <% }); %>
-            .col-xs-2.pagination-size
-                select
-                    option(value="10") 10
-                    option(value="20") 20
-                    option(value="50") 50
-                    option(value="100") 100
-                span.per-page Per Page
-            .col-xs-10.text-center(style="padding: 0px;")
-                nav
-                    ul.pagination
-
-        script#templateLogEditView(type="text/template")
-            .row
-
-        script#templateLogUsersView(type="text/template")
-            label.col-xs-4.control-label User
-            .col-xs-8
-                select#id-select-log-users(style="width: 100%;")
-                    option(value="") All Users
-                    <% _.each( data, function(model, key) { %> 
-                    option(value!="<%- model.id %>") <%- model.email %>
-                    <% }); %>
 
         #modal-add-new-group.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
             .modal-dialog

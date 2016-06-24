@@ -118,24 +118,19 @@ block content
                     .content-groups-list
                 #id-content-configuration.main-content
                     .row.tab-buttons
-                        .col-xs-10
-                            form(onsubmit="return false;")
-                                label.col-sm-1.control-label From:
-                                .col-xs-2.sel-date-field
-                                    input.js-select-logs-startdate.form-control(type="text", value="")
-                                label.col-sm-1.control-label To:
-                                .col-xs-2.sel-date-field(style="padding-right: 30px;")
-                                    input.js-select-logs-enddate.form-control(type="text", value="")
-                                .col-xs-4.log-user-list(style="padding: 0;")
+                        .col-xs-5
+                            h4 Category titles
+                        .col-xs-5
+                            button.js-save-changes.btn.btn-default(type="button") Save Changes
                         .col-xs-2.text-right
                             button.js-download-report.btn.btn-default(type="button") Export to Excel
 
                     .row.users-row.header-row
-                        .col-xs-3.user-cell.sort-by-name(data-id="strCreated") Date/Time
+                        .col-xs-3.user-cell.sort-by-name(data-id="category") Category
                             span.arrow-sort-dn
-                        .col-xs-3.user-cell.sort-by-name(data-id="email") User
+                        .col-xs-6.user-cell.sort-by-name(data-id="description") Description
                             span.arrow-sort-dn
-                        .col-xs-6.user-cell.sort-by-name(data-id="email") Action
+                        .col-xs-3.user-cell.sort-by-name(data-id="name") Displayed Name
                             span.arrow-sort-dn
                     .content-logs-list
                 #id-content-report.main-content
@@ -393,10 +388,11 @@ block content
         script#templateLogsListView(type="text/template")
             <% _.each(data, function(model, key) { %>
             .row.users-row(data-id!="<%- model.id %>")
-                .col-xs-3.user-cell <%- model.strCreated || '' %>
+                .col-xs-3.user-cell <%- model.category || '' %>
                 //.col-xs-3.user-cell <%- ( ( model.author || {} ).firstName || '' ) + ' ' + ( ( model.author || {} ).lastName || '' ) %>
-                .col-xs-3.user-cell <%- model.email %>
-                .col-xs-6.log-action-cell <%- model.message || '' %>
+                .col-xs-6.user-cell <%- model.description %>
+                .col-xs-3.log-action-cell
+                    input.js-display-name.form-control(type="text", value!="<%- model.name || '' %>") 
                 .row.tab-box.col-xs-12
             <% }); %>
             .col-xs-2.pagination-size

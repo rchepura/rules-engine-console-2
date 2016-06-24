@@ -1062,7 +1062,7 @@ nav ul.pagination li.dots span {
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .log-action-cell,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .log-action-cell,
 .estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .log-action-cell {
-  padding: 15px;
+  padding: 5px 10px;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .all-checkboxes.active,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .all-checkboxes.active,

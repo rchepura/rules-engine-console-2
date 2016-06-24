@@ -239,6 +239,16 @@ define(['jquery', 'backbone', 'moment', 'matcher', 'select2'], function($, Backb
             to = to || new Date(me.$el.find('.js-select-logs-enddate').val()).getTime();
             
             
+            me.LogList = [
+                {category: 'Approval requests', description: 'Screen that displays of all requests', name: 'Approvals'}
+                ,{category: 'Chat sessions', description: 'Person to person and group chat session section', name: 'Conversations'}
+                ,{category: 'Surveys', description: 'Surveys conducted and sent via chat sessions', name: 'Surveys'}
+                ,{category: 'Checklists', description: 'Checklists that can be shared between users', name: 'Checklists'}
+                ,{category: 'Approval rerorts', description: 'Reports exported and submitted to proper channels', name: 'Reports'}
+                ,{category: 'User options/statistics', description: 'User information and statistics', name: 'Me'}
+            ];
+            
+            
             if ( !_.isEmpty(me.LogList) ) {
                 if ( callback ) {
                     me.getLogPage(function(pagedLogs) {

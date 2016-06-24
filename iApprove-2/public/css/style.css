@@ -947,12 +947,12 @@ nav ul.pagination li.dots span {
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-buttons,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-buttons,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-buttons {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-buttons {
   line-height: 80px;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-buttons button,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-buttons button,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-buttons button {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-buttons button {
   border: 2px solid #f5f4f5;
 /*min-width: 160px;*/
   color: #7fadca;
@@ -962,19 +962,19 @@ nav ul.pagination li.dots span {
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-buttons button .user-icon,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-buttons button .user-icon,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-buttons button .user-icon {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-buttons button .user-icon {
   height: 30px;
   margin-right: 10px;
   width: 30px;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-buttons #id-search-users-btn-search,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-buttons #id-search-users-btn-search,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-buttons #id-search-users-btn-search {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-buttons #id-search-users-btn-search {
   min-width: 100px;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-buttons input,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-buttons input,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-buttons input {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-buttons input {
   border: 2px solid #f5f4f5;
   box-shadow: none;
   display: inline-block;
@@ -985,7 +985,7 @@ nav ul.pagination li.dots span {
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-buttons span.icon-search,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-buttons span.icon-search,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-buttons span.icon-search {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-buttons span.icon-search {
   background: rgba(0,0,0,0) url("../images/assets/misc/icon_search.png") no-repeat scroll 0 0;
   display: inline-block;
   height: 22px;
@@ -997,7 +997,7 @@ nav ul.pagination li.dots span {
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-buttons span.icon-search-reset,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-buttons span.icon-search-reset,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-buttons span.icon-search-reset {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-buttons span.icon-search-reset {
   border: 1px solid #ccc;
   color: #ccc;
   border-radius: 50%;
@@ -1012,30 +1012,30 @@ nav ul.pagination li.dots span {
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row.header-row .user-cell,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row.header-row .user-cell,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row.header-row .user-cell {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row.header-row .user-cell {
   font-weight: 700;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .log-user-list select,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .log-user-list select,
-.estee-wrapper .main-contents-conttainer #id-content-report .log-user-list select {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .log-user-list select {
   height: 38px;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row {
   border-bottom: 1px solid #bdcdd5;
   color: #5f5f5f;
   font-size: 15px;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .all-checkboxes,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .all-checkboxes,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .all-checkboxes,
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .all-checkboxes,
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .user-checkbox,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .user-checkbox,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .user-checkbox,
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .user-checkbox,
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .user-active,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .user-active,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .user-active {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .user-active {
   background: transparent url("../images/assets/misc/check_no.png") no-repeat scroll 0 0;
   cursor: pointer;
   display: inline-block;
@@ -1045,14 +1045,14 @@ nav ul.pagination li.dots span {
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .user-cell,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .user-cell,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .user-cell {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .user-cell {
   height: 48px;
   line-height: 48px;
   white-space: nowrap;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .user-cell img,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .user-cell img,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .user-cell img {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .user-cell img {
   border: none;
   border-radius: 50%;
   height: 36px;
@@ -1061,39 +1061,39 @@ nav ul.pagination li.dots span {
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .log-action-cell,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .log-action-cell,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .log-action-cell {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .log-action-cell {
   padding: 15px;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .all-checkboxes.active,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .all-checkboxes.active,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .all-checkboxes.active,
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .all-checkboxes.active,
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .user-checkbox.active,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .user-checkbox.active,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .user-checkbox.active {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .user-checkbox.active {
   background-image: url("../images/assets/misc/check_yes.png");
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .user-active,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .user-active,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .user-active {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .user-active {
   background-image: url("../images/assets/misc/active.png");
   cursor: default;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .tab-box,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .tab-box,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .tab-box {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .tab-box {
   display: none;
   margin: 0;
   padding: 0;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .tab-box > div:first-child,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .tab-box > div:first-child,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .tab-box > div:first-child {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .tab-box > div:first-child {
   border-top: 1px solid #bdcdd5;
   margin: 5px 0 0 50px;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .tab-box .pane-stats,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .tab-box .pane-stats,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .tab-box .pane-stats {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .tab-box .pane-stats {
 /*margin: 10px 0 10px 50px;*/
   background-color: #fff;
   border: 1px solid #ccc;
@@ -1102,7 +1102,7 @@ nav ul.pagination li.dots span {
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .tab-box .pane-stats .user-stat-row,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .tab-box .pane-stats .user-stat-row,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .tab-box .pane-stats .user-stat-row {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .tab-box .pane-stats .user-stat-row {
   border-bottom: 1px solid #ccc;
   display: table;
   line-height: 40px;
@@ -1110,19 +1110,19 @@ nav ul.pagination li.dots span {
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .tab-box .pane-stats .user-stat-row.header-row,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .tab-box .pane-stats .user-stat-row.header-row,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .tab-box .pane-stats .user-stat-row.header-row {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .tab-box .pane-stats .user-stat-row.header-row {
   font-weight: 600;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .tab-box .pane-stats .user-stat-cell,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .tab-box .pane-stats .user-stat-cell,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .tab-box .pane-stats .user-stat-cell {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .tab-box .pane-stats .user-stat-cell {
   font-size: 12px;
   padding: 0 10px;
   white-space: nowrap;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .tab-box .edit-user-footer,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .tab-box .edit-user-footer,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .tab-box .edit-user-footer {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .tab-box .edit-user-footer {
   background-color: #e9f0f2;
   height: 50px;
   margin-top: 5px;
@@ -1131,7 +1131,7 @@ nav ul.pagination li.dots span {
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .tab-box .edit-user-footer button,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .tab-box .edit-user-footer button,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .tab-box .edit-user-footer button {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .tab-box .edit-user-footer button {
   min-width: 160px;
   height: 36px;
   color: #3583d9;
@@ -1140,13 +1140,13 @@ nav ul.pagination li.dots span {
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row .tab-box .edit-user-footer button.del-btn,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row .tab-box .edit-user-footer button.del-btn,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row .tab-box .edit-user-footer button.del-btn {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row .tab-box .edit-user-footer button.del-btn {
   color: #e18c8d;
   border: 2px solid #e18c8d;
 }
 .estee-wrapper .main-contents-conttainer #id-content-users .row.users-row.active,
 .estee-wrapper .main-contents-conttainer #id-setings-admins .row.users-row.active,
-.estee-wrapper .main-contents-conttainer #id-content-report .row.users-row.active {
+.estee-wrapper .main-contents-conttainer #id-content-configuration .row.users-row.active {
   background-color: #f4f3f4;
 }
 .estee-wrapper .main-contents-conttainer #id-content-groups .row.groups-buttons {
@@ -1344,24 +1344,24 @@ nav ul.pagination li.dots span {
 .estee-wrapper .main-contents-conttainer #id-content-analytics .content-analytics-feedback.active {
   display: block;
 }
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row {
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row {
   margin: 50px 0;
 }
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row .settings-coll-1 > div {
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row .settings-coll-1 > div {
   margin-top: -12px;
 }
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row .title-2 {
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row .title-2 {
   text-align: right;
 }
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row .settings-coll-2 {
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row .settings-coll-2 {
   border-top: 1px solid #bdcdd5;
   padding-top: 15px;
   padding-left: 30px;
 }
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row .settings-coll-2 > div.row {
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row .settings-coll-2 > div.row {
   margin-top: 15px;
 }
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row .settings-coll-2 > div.row span.label-txt {
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row .settings-coll-2 > div.row span.label-txt {
   display: inline-block;
   left: -185px;
   line-height: 34px;
@@ -1369,27 +1369,27 @@ nav ul.pagination li.dots span {
   text-align: right;
   width: 150px;
 }
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row .settings-coll-2 input {
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row .settings-coll-2 input {
   display: inline-block;
   text-align: left;
   border: 2px solid #ecebeb;
   border-radius: 4px;
 }
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row .settings-coll-2 button {
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row .settings-coll-2 button {
   border: 2px solid #ecebeb;
   color: #888;
   font-size: 16px;
   height: 35px;
   padding: 4px 15px;
 }
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row .settings-coll-2 button:hover,
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row .settings-coll-2 button:active {
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row .settings-coll-2 button:hover,
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row .settings-coll-2 button:active {
   color: #005d95;
 }
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row .settings-coll-2 .danger-zone {
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row .settings-coll-2 .danger-zone {
   color: #c40001;
 }
-.estee-wrapper .main-contents-conttainer #id-content-configuration .settings-row .settings-coll-2 .danger-zone button {
+.estee-wrapper .main-contents-conttainer #id-content-report .settings-row .settings-coll-2 .danger-zone button {
   color: #c40001;
   border: 2px solid #c40001;
   margin-right: 15px;

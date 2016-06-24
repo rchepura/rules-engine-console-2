@@ -85,9 +85,9 @@ block content
                             span.arrow-sort-dn
                         .col-xs-3.user-cell.sort-by-name(data-id="email") Email Address
                             span.arrow-sort-dn
-                        .col-xs-1.user-cell.sort-by-name(data-id="role") Role
+                        .col-xs-1.user-cell.sort-by-name(data-id="role") Group
                             span.arrow-sort-dn
-                        .col-xs-1.user-cell.text-center.sort-by-name(data-id="status") Has Used
+                        .col-xs-1.user-cell.text-center.sort-by-name(data-id="status") Active
                             span.arrow-sort-dn
                         .col-xs-1.user-cell.text-center.sort-by-user-password Password
                             span.arrow-sort-dn
@@ -117,6 +117,28 @@ block content
                         .col-xs-2
                     .content-groups-list
                 #id-content-configuration.main-content
+                    .row.tab-buttons
+                        .col-xs-10
+                            form(onsubmit="return false;")
+                                label.col-sm-1.control-label From:
+                                .col-xs-2.sel-date-field
+                                    input.js-select-logs-startdate.form-control(type="text", value="")
+                                label.col-sm-1.control-label To:
+                                .col-xs-2.sel-date-field(style="padding-right: 30px;")
+                                    input.js-select-logs-enddate.form-control(type="text", value="")
+                                .col-xs-4.log-user-list(style="padding: 0;")
+                        .col-xs-2.text-right
+                            button.js-download-report.btn.btn-default(type="button") Export to Excel
+
+                    .row.users-row.header-row
+                        .col-xs-3.user-cell.sort-by-name(data-id="strCreated") Date/Time
+                            span.arrow-sort-dn
+                        .col-xs-3.user-cell.sort-by-name(data-id="email") User
+                            span.arrow-sort-dn
+                        .col-xs-6.user-cell.sort-by-name(data-id="email") Action
+                            span.arrow-sort-dn
+                    .content-logs-list
+                #id-content-report.main-content
                     .row.settings-row
                         .col-xs-4.settings-coll-1
                             .title-2 SUPPORT EMAIL CHANGE
@@ -170,28 +192,6 @@ block content
                                 .col-xs-12.danger-zone(style="margin-bottom: 50px;")
                                     button#id-upload-user-csv.btn.btn-default(type="button") Upload User CSV file
                                     span Uploading CSV file will create users
-                #id-content-report.main-content
-                    .row.tab-buttons
-                        .col-xs-10
-                            form(onsubmit="return false;")
-                                label.col-sm-1.control-label From:
-                                .col-xs-2.sel-date-field
-                                    input.js-select-logs-startdate.form-control(type="text", value="")
-                                label.col-sm-1.control-label To:
-                                .col-xs-2.sel-date-field(style="padding-right: 30px;")
-                                    input.js-select-logs-enddate.form-control(type="text", value="")
-                                .col-xs-4.log-user-list(style="padding: 0;")
-                        .col-xs-2.text-right
-                            button.js-download-report.btn.btn-default(type="button") Export to Excel
-
-                    .row.users-row.header-row
-                        .col-xs-3.user-cell.sort-by-name(data-id="strCreated") Date/Time
-                            span.arrow-sort-dn
-                        .col-xs-3.user-cell.sort-by-name(data-id="email") User
-                            span.arrow-sort-dn
-                        .col-xs-6.user-cell.sort-by-name(data-id="email") Action
-                            span.arrow-sort-dn
-                    .content-logs-list
 
         script#templateUsersListView(type="text/template")
             <% _.each(data, function(model, key) { %>
@@ -227,39 +227,41 @@ block content
         script#templateUserEditView(type="text/template")
             .row
             .row(style="margin: 10px 0px 10px 50px;")
-                .col-xs-4.pane-stats
+                .col-xs-8.pane-stats
                     .user-stat-row.header-row
-                        .col-xs-2.user-stat-cell Section
-                        .col-xs-2.user-stat-cell.text-center Posts
-                        .col-xs-3.user-stat-cell.text-center Comments
-                        .col-xs-2.user-stat-cell.text-center Likes
-                        .col-xs-3.user-stat-cell.text-center Responses
+                        .col-xs-1.user-stat-cell Type
+                        .col-xs-2.user-stat-cell.text-center Created
+                        .col-xs-2.user-stat-cell.text-center Received
+                        .col-xs-1.user-stat-cell.text-center Approved
+                        .col-xs-2.user-stat-cell.text-center Rejected
+                        .col-xs-2.user-stat-cell.text-center Pending
+                        .col-xs-2.user-stat-cell.text-center Completed
                     .user-stat-row
-                        .col-xs-2.user-stat-cell IDEA
-                        .col-xs-2.user-stat-cell.text-center <%- model.ideaPosted %>
-                        .col-xs-3.user-stat-cell.text-center <%- model.ideaComments %>
-                        .col-xs-2.user-stat-cell.text-center <%- model.ideaLikes %>
-                        .col-xs-3.user-stat-cell.text-center --
-                    .user-stat-row
-                        .col-xs-2.user-stat-cell Feedback
+                        .col-xs-1.user-stat-cell Approvals
+                        .col-xs-2.user-stat-cell.text-center 18
+                        .col-xs-2.user-stat-cell.text-center 22
+                        .col-xs-1.user-stat-cell.text-center 20
+                        .col-xs-2.user-stat-cell.text-center 2
+                        .col-xs-2.user-stat-cell.text-center 0
                         .col-xs-2.user-stat-cell.text-center --
-                        .col-xs-3.user-stat-cell.text-center --
+                    .user-stat-row
+                        .col-xs-1.user-stat-cell Surveys
+                        .col-xs-2.user-stat-cell.text-center 6
+                        .col-xs-2.user-stat-cell.text-center 16
+                        .col-xs-1.user-stat-cell.text-center --
                         .col-xs-2.user-stat-cell.text-center --
-                        .col-xs-3.user-stat-cell.text-center <%- model.feedbackResponses %>
+                        .col-xs-2.user-stat-cell.text-center --
+                        .col-xs-2.user-stat-cell.text-center 16
                     .user-stat-row
-                        .col-xs-2.user-stat-cell My Artistry
-                        .col-xs-2.user-stat-cell.text-center <%- model.artistryPosts %>
-                        .col-xs-3.user-stat-cell.text-center <%- model.artistryComments %>
-                        .col-xs-2.user-stat-cell.text-center <%- model.artistryLikes %>
-                        .col-xs-3.user-stat-cell.text-center --
-                    .user-stat-row
-                        .col-xs-2.user-stat-cell Eyes & Ears
-                        .col-xs-2.user-stat-cell.text-center <%- model.alertPosts %>
-                        .col-xs-3.user-stat-cell.text-center <%- model.alertComments %>
-                        .col-xs-2.user-stat-cell.text-center <%- model.alertLikes %>
-                        .col-xs-3.user-stat-cell.text-center --
-                .col-xs-8
-                    table.table.borderless
+                        .col-xs-1.user-stat-cell Checklists
+                        .col-xs-2.user-stat-cell.text-center 12
+                        .col-xs-2.user-stat-cell.text-center 8
+                        .col-xs-1.user-stat-cell.text-center --
+                        .col-xs-2.user-stat-cell.text-center --
+                        .col-xs-2.user-stat-cell.text-center --
+                        .col-xs-2.user-stat-cell.text-center 8
+                .col-xs-4
+                    //table.table.borderless
                         <% for (var idx = 0; idx < userDetails.length; idx++) { %>
                         tr
                             td
@@ -368,10 +370,9 @@ block content
                             .col-xs-8.row-field
                                 input#id-add-user-email.form-control(type="text", name="id-add-user-email", value="", class="validate[required,custom[email]]")
                         .row
-                            .col-xs-4.row-label Role
+                            .col-xs-4.row-label Group
                             .col-xs-8.row-field
                                 select#id-add-user-role
-                                    option(value="ARTIST") Artist
                                     option(value="LEADER") Admin
                         .row.pass-line
                         .row

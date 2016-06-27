@@ -61,11 +61,90 @@ define(['jquery', 'backbone', 'moment'], function($, Backbone, Moment) {
             'click #id-client-icon': "newClient",
             'click .js-modal-add-new-client-btn': "createNewClient",
             'click .js-app-icon': "clientIcon",
-            'click .js-client-background': "clientBackground"
+            'click .js-client-background': "clientBackground",
+            'click .client-menu-item': "onClientMenuItem"
+        },
+        getClients: function(callback) {
+            var me = this,
+                user = new me.Model();
+            
+            callback([
+                {
+                    title: 'General Motors',
+                    createdStr: '06/16/2016',
+                    bg: 'images/assets/Clients/bg_gm.png',
+                    logo: 'images/assets/Clients/logo_gm.png'
+                },
+                {
+                    title: 'Estee Lauder Companies',
+                    createdStr: '06/16/2016',
+                    bg: 'images/assets/Clients/bg_estee.png',
+                    logo: 'images/assets/Clients/logo_estee.png'
+                },
+                {
+                    title: 'Mac Cosmetics',
+                    createdStr: '06/16/2016',
+                    bg: 'images/assets/Clients/bg_mac.png',
+                    logo: 'images/assets/Clients/logo_mac.png'
+                },
+                {
+                    title: 'MITRE Corporation',
+                    createdStr: '06/16/2016',
+                    bg: 'images/assets/Clients/bg_mitre.png',
+                    logo: 'images/assets/Clients/logo_mitre.png'
+                }
+            ]);
+            return;
+
+            Util.showSpinner();
+            user.fetch({
+                url: 'api/clients',
+                success: function(model, res) {
+                    var topics;
+
+                    if ( res && false !== res.success ) {
+                        topics = res || {};
+                        callback(topics);
+                    } else {
+                        Backbone.history.navigate('#/logout');
+                    }
+                },
+                complete: function(res) {
+                    if ( 401 == (res || {}).status ) {
+                        Backbone.history.navigate('#/logout');
+                    }
+                    Util.hideSpinner();
+                }
+            });
+        },
+        onClientMenuItem: function(e) {
+            var me = this,
+                $el = $(e.currentTarget),
+                currItem = $el.attr('data-id');
+            
+            switch (currItem) {
+                case 'app-manager':
+                    console.log('111');
+                    break;
+                case 'settings':
+                    $('#modal-add-new-client').modal('show');
+                    break;
+                default : ;
+            }
         },
         init: function() {
             var me = this;
-            me.hideLoader();
+            
+            me.getClients(function(clients) {
+                me.render(clients);
+                me.hideLoader();
+            });            
+        },
+        render: function(clients) {
+            var me = this,
+                template = $(_.template(me.$el.find('#templateClientListView').html(), {data: clients}));
+                
+            me.$el.find('.clients-pane-icons ul').html(template);
         },
         newClient: function (e) {
             var me = this;

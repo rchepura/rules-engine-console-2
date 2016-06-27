@@ -51,34 +51,22 @@ block content
                 .clients-pane-icons.clearfix
                     h4 Select a Client
                     ul
-                        li
-                            button.btn(type="button")
-                                img(src="images/assets/client-list/client-1.png")
-                            div
-                                | General Motors
-                                span created 06/16/2016
-                        li
-                            button.btn(type="button")
-                                img(src="images/assets/client-list/client-2.png")
-                            div
-                                | General Motors
-                                span created 06/16/2016
-                        li
-                            button.btn(type="button")
-                                img(src="images/assets/client-list/client-3.png")
-                            div
-                                | General Motors
-                                span created 06/16/2016
-                        li
-                            button.btn(type="button")
-                                img(src="images/assets/client-list/client-4.png")
-                            div
-                                | General Motors
-                                span created 06/16/2016
-                        li
-                            button#id-client-icon.btn(type="button")
-                                img(src="images/assets/client-list/add-new.png")
-                            div
+
+            script#templateClientListView(type="text/template")
+                <% _.each(data, function(model, key) { %>
+                li
+                    .client-btn.btn(style!="background-image: url(<%- model.bg %>);")
+                        .bg-dark
+                        img(src!="<%- model.logo %>")
+                        .client-menu
+                            .client-menu-item(data-id="app-manager") App Manager
+                            .client-menu-item(data-id="settings") Setings
+                    .client-description
+                        | <%- model.title %>
+                        span created <%- model.createdStr %>
+                <% }); %>
+                li
+                    .client-btn#id-client-icon.btn(style!="background-image: url(images/assets/Clients/bg_add_new.png);")
 
             #modal-add-new-client.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
                 .modal-dialog

@@ -200,9 +200,10 @@ nav ul.pagination li.dots span {
   margin-top: 15px;
   visibility: hidden;
   position: relative;
-  z-index: 7;
 }
 .clients-pane-icons ul li .client-btn .client-menu .client-menu-item {
+  display: block;
+  text-decoration: none;
   background: transparent url("../images/assets/Clients/icon_appmanager.png") no-repeat 0 0;
   color: #fff;
   font-size: 16px;
@@ -211,7 +212,6 @@ nav ul.pagination li.dots span {
   margin: 8px 30px;
   padding-left: 30px;
   text-align: left;
-  cursor: pointer;
 }
 .clients-pane-icons ul li .client-btn .client-menu .client-menu-item:last-child {
   background-image: url("../images/assets/Clients/icon_settings.png");
@@ -1539,47 +1539,49 @@ nav ul.pagination li.dots span {
   height: 75px;
   padding: 5px 10px;
 }
-#modal-add-new-client .modal-dialog {
+.client-info .modal-dialog {
   width: 962px;
 }
-#modal-add-new-client .modal-body {
+.client-info .modal-body {
   padding: 10px 50px;
 }
-#modal-add-new-client .row-label {
+.client-info .row-label {
   color: #9d9d9d;
   font-size: 15px;
   line-height: 36px;
   padding: 10px 5px;
   white-space: nowrap;
 }
-#modal-add-new-client .row-field {
+.client-info .row-field {
   padding: 10px 5px;
 }
-#modal-add-new-client .row-field input,
-#modal-add-new-client .row-field select {
+.client-info .row-field input,
+.client-info .row-field select {
   height: 36px;
   width: 100%;
   border: 2px solid #e9e9e9;
 }
-#modal-add-new-client .row-field input.js-app-icon,
-#modal-add-new-client .row-field input.js-client-background {
+.client-info .row-field input.js-app-icon,
+.client-info .row-field input.js-client-background {
   background-image: none;
   background-position: 90% 50%;
   background-repeat: no-repeat;
   background-size: 20px 20px;
   cursor: default;
 }
-#modal-add-new-client .row-field input#id-app-icon,
-#modal-add-new-client .row-field input#id-background {
+.client-info .row-field input#id-appIcon,
+.client-info .row-field input#id-background,
+.client-info .row-field input#id-edit-appIcon,
+.client-info .row-field input#id-edit-background {
   border: none;
   height: 0;
   padding: 0;
 }
-#modal-add-new-client .row.pass-line {
+.client-info .row.pass-line {
   border-top: 1px solid #bdcdd5;
   margin: 15px 0 5px;
 }
-#modal-add-new-client span.asterisk-red {
+.client-info span.asterisk-red {
   color: #f00;
 }
 .modal-footer {

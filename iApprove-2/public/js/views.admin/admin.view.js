@@ -60,9 +60,10 @@ define(['jquery', 'backbone', 'moment'], function($, Backbone, Moment) {
         events: {
             'click #id-client-icon': "newClient",
             'click .js-modal-add-new-client-btn': "createNewClient",
+            'click .js-modal-edit-client-btn': "onEditClient",
             'click .js-app-icon': "clientIcon",
             'click .js-client-background': "clientBackground",
-            'click .client-menu-item': "onClientMenuItem"
+            'click .client-menu-item.client-settings': "onClientMenuItem"
         },
         getClients: function(callback) {
             var me = this,
@@ -70,24 +71,28 @@ define(['jquery', 'backbone', 'moment'], function($, Backbone, Moment) {
             
             callback([
                 {
+                    clientId: '11111',
                     title: 'General Motors',
                     createdStr: '06/16/2016',
                     bg: 'images/assets/Clients/bg_gm.png',
                     logo: 'images/assets/Clients/logo_gm.png'
                 },
                 {
+                    clientId: '22222',
                     title: 'Estee Lauder Companies',
                     createdStr: '06/16/2016',
                     bg: 'images/assets/Clients/bg_estee.png',
                     logo: 'images/assets/Clients/logo_estee.png'
                 },
                 {
+                    clientId: '333333',
                     title: 'Mac Cosmetics',
                     createdStr: '06/16/2016',
                     bg: 'images/assets/Clients/bg_mac.png',
                     logo: 'images/assets/Clients/logo_mac.png'
                 },
                 {
+                    clientId: '44444',
                     title: 'MITRE Corporation',
                     createdStr: '06/16/2016',
                     bg: 'images/assets/Clients/bg_mitre.png',
@@ -120,17 +125,25 @@ define(['jquery', 'backbone', 'moment'], function($, Backbone, Moment) {
         onClientMenuItem: function(e) {
             var me = this,
                 $el = $(e.currentTarget),
-                currItem = $el.attr('data-id');
+                $elParent = $el.closest('.client-btn'),
+                clientId = $el.attr('data-id'),
+                tmpClientData = {
+                    appIcon: $elParent.find('img').attr('src'),
+                    background: $elParent.attr('data-id'),
+                    clientId: $elParent.find('.client-settings').attr('data-id'),
+                    clientName: $elParent.next('.client-description').attr('data-id'),
+                    clientUrl: 'test.magnet.com',
+                    firstName: 'test',
+                    lastName: 'test',
+                    email: 'test@magnet.com',
+                    company: 'test',
+                    city: 'Palo Alto',
+                    state: 'CA',
+                    zip: '94301',
+                    group: 'Admin'
+                };
             
-            switch (currItem) {
-                case 'app-manager':
-                    console.log('111');
-                    break;
-                case 'settings':
-                    $('#modal-add-new-client').modal('show');
-                    break;
-                default : ;
-            }
+            me.editClient(tmpClientData);
         },
         init: function() {
             var me = this;
@@ -146,10 +159,34 @@ define(['jquery', 'backbone', 'moment'], function($, Backbone, Moment) {
                 
             me.$el.find('.clients-pane-icons ul').html(template);
         },
-        newClient: function (e) {
-            var me = this;
+        newClient: function () {
+            var me = this,
+                $newModal = $('#modal-add-new-client');
 
+            $newModal.find('input').val('');
             $('#modal-add-new-client').modal('show');
+        },
+        editClient: function (clientInfo) {
+            var me = this,
+                $editModal = $('#modal-edit-client'),
+                $currEl = null;
+
+            clientInfo = clientInfo || {};
+            $editModal.find('input').val('');
+            
+            for ( var i in clientInfo ) {
+                $currEl = $editModal.find('#id-edit-' + i);
+                if ( 0 < $currEl.length ) {
+                    if ( 'appIcon' == i ) {
+                        $editModal.find('.js-app-icon').css('background-image',  'url(' + clientInfo[i] + ')');
+                    } else if ( 'background' == i ) {
+                        $editModal.find('.js-client-background').css('background-image',  'url(' + clientInfo[i] + ')');
+                    }
+                    $currEl.val(clientInfo[i] || '');
+                }
+            }
+            
+            $editModal.modal('show');
         },
         createNewClient: function (e) {
             var me = this,
@@ -177,6 +214,44 @@ define(['jquery', 'backbone', 'moment'], function($, Backbone, Moment) {
             
             Alerts.Error.display({
                 title: 'Client Info',
+                content: (function () {
+                    var res = '';
+                    
+                    _.each(clientData, function(m, i) {
+                        res += i + ': ' + m + '<br>';
+                    });
+                    
+                    return res;
+                })()
+            });
+            
+        },
+        onEditClient: function (e) {
+            var me = this,
+                clientData = {},
+                pFields = $('#modal-edit-client input, #modal-edit-client select'),
+                isValid = true;
+              
+            pFields.each(function () {
+                var curID = ($(this).attr('id') || '').replace('id-edit-', '');
+                
+                if ( curID && '' !== curID ) {
+
+                    $(this).val($.trim($(this).val()));
+                    if ( !isValid || !$(this).validationEngine('validate') ) {
+                        isValid = false;
+                        return;
+                    }
+                    clientData[curID] = $(this).val();
+                }
+            });
+
+            if ( !isValid || ( _.isEmpty(clientData) ) ) {
+                return;
+            }
+            
+            Alerts.Error.display({
+                title: 'Updated Client Info',
                 content: (function () {
                     var res = '';
                     

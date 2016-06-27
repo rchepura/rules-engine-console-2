@@ -55,20 +55,20 @@ block content
             script#templateClientListView(type="text/template")
                 <% _.each(data, function(model, key) { %>
                 li
-                    .client-btn.btn(style!="background-image: url(<%- model.bg %>);")
+                    .client-btn.btn(style!="background-image: url(<%- model.bg %>);", data-id!="<%- model.bg %>")
                         .bg-dark
                         img(src!="<%- model.logo %>")
                         .client-menu
-                            .client-menu-item(data-id="app-manager") App Manager
-                            .client-menu-item(data-id="settings") Setings
-                    .client-description
+                            a.client-menu-item(href="/", target="_blank") App Manager
+                            a.client-menu-item.client-settings(href="javascript:void(0);", data-id!="<%- model.clientId %>") Setings
+                    .client-description(data-id!="<%- model.title %>")
                         | <%- model.title %>
                         span created <%- model.createdStr %>
                 <% }); %>
                 li
-                    .client-btn#id-client-icon.btn(style!="background-image: url(images/assets/Clients/bg_add_new.png);")
+                    .client-btn#id-client-icon.btn(style!="background-image: url(images/assets/Clients/bg_add_new.png); cursor: pointer;")
 
-            #modal-add-new-client.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
+            #modal-add-new-client.client-info.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
                 .modal-dialog
                     .modal-content
                         .modal-header
@@ -83,7 +83,7 @@ block content
                                         .col-xs-3.row-label.text-right App Icon<span class="asterisk-red">*</span>
                                         .col-xs-3.text-center.row-field
                                             input.js-app-icon.form-control(type="text", value="", placeholder="Choose File...")
-                                            input#id-app-icon.form-control(type="text", value="", class="validate[required]")
+                                            input#id-appIcon.form-control(type="text", value="", class="validate[required]")
                                         .col-xs-3.row-label.text-right Background
                                         .col-xs-3.text-center.row-field
                                             input.js-client-background.form-control(type="text", value="", placeholder="Choose File...")
@@ -91,14 +91,14 @@ block content
                                     .row
                                         .col-xs-3.row-label.text-right Client ID<span class="asterisk-red">*</span>
                                         .col-xs-3.text-center.row-field
-                                            input#id-client-id.form-control(type="text", value="", class="validate[required]")
+                                            input#id-clientId.form-control(type="text", value="", class="validate[required]")
                                         .col-xs-2.row-label.text-right Client Name<span class="asterisk-red">*</span>
                                         .col-xs-4.text-center.row-field
-                                            input#id-client-name.form-control(type="text", value="", class="validate[required]")
+                                            input#id-clientName.form-control(type="text", value="", class="validate[required]")
                                     .row
                                         .col-xs-3.row-label.text-right Client URL<span class="asterisk-red">*</span>
                                         .col-xs-9.text-center.row-field
-                                            input#id-client-url.form-control(type="text", value="", class="validate[required]")
+                                            input#id-clientUrl.form-control(type="text", value="", class="validate[required]")
                             .row.pass-line
                             .row
                                 .col-xs-3.row-label
@@ -107,10 +107,10 @@ block content
                                     .row
                                         .col-xs-3.row-label.text-right First Name<span class="asterisk-red">*</span>
                                         .col-xs-3.text-center.row-field
-                                            input#id-firstname.form-control(type="text", value="", class="validate[required]")
+                                            input#id-firstName.form-control(type="text", value="", class="validate[required]")
                                         .col-xs-2.row-label.text-right Last Name<span class="asterisk-red">*</span>
                                         .col-xs-4.text-center.row-field
-                                            input#id-lastname.form-control(type="text", value="", class="validate[required]")
+                                            input#id-lastName.form-control(type="text", value="", class="validate[required]")
                                     .row
                                         .col-xs-3.row-label.text-right Email Address<span class="asterisk-red">*</span>
                                         .col-xs-9.text-center.row-field
@@ -151,6 +151,90 @@ block content
                             .row
                                 button.js-modal-btn-cancel.btn.btn-default(data-dismiss="modal", style="margin-right: 20px;", type="button") Cancel
                                 button.js-modal-add-new-client-btn.btn.btn-default(aria-hidden="true", type="button") Create New Client
+
+            #modal-edit-client.client-info.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h4.modal-title Edit Client Info
+                        .modal-body.clearfix
+                            .row.pass-line
+                            .row
+                                .col-xs-3.row-label
+                                    h4 Basic information
+                                .col-xs-9
+                                    .row
+                                        .col-xs-3.row-label.text-right App Icon<span class="asterisk-red">*</span>
+                                        .col-xs-3.text-center.row-field
+                                            input.js-app-icon.form-control(type="text", value="", placeholder="Choose File...")
+                                            input#id-edit-appIcon.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-3.row-label.text-right Background
+                                        .col-xs-3.text-center.row-field
+                                            input.js-client-background.form-control(type="text", value="", placeholder="Choose File...")
+                                            input#id-edit-background.form-control(type="text", value="", class="validate[required]")
+                                    .row
+                                        .col-xs-3.row-label.text-right Client ID<span class="asterisk-red">*</span>
+                                        .col-xs-3.text-center.row-field
+                                            input#id-edit-clientId.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-2.row-label.text-right Client Name<span class="asterisk-red">*</span>
+                                        .col-xs-4.text-center.row-field
+                                            input#id-edit-clientName.form-control(type="text", value="", class="validate[required]")
+                                    .row
+                                        .col-xs-3.row-label.text-right Client URL<span class="asterisk-red">*</span>
+                                        .col-xs-9.text-center.row-field
+                                            input#id-edit-clientUrl.form-control(type="text", value="", class="validate[required]")
+                            .row.pass-line
+                            .row
+                                .col-xs-3.row-label
+                                    h4 Contact information
+                                .col-xs-9
+                                    .row
+                                        .col-xs-3.row-label.text-right First Name<span class="asterisk-red">*</span>
+                                        .col-xs-3.text-center.row-field
+                                            input#id-edit-firstName.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-2.row-label.text-right Last Name<span class="asterisk-red">*</span>
+                                        .col-xs-4.text-center.row-field
+                                            input#id-edit-lastName.form-control(type="text", value="", class="validate[required]")
+                                    .row
+                                        .col-xs-3.row-label.text-right Email Address<span class="asterisk-red">*</span>
+                                        .col-xs-9.text-center.row-field
+                                            input#id-edit-email.form-control(type="text", value="", class="validate[required,custom[email]]")
+                                    .row
+                                        .col-xs-3.row-label.text-right Company<span class="asterisk-red">*</span>
+                                        .col-xs-5.text-center.row-field
+                                            input#id-edit-company.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-4
+                                    .row
+                                        .col-xs-3.row-label.text-right City<span class="asterisk-red">*</span>
+                                        .col-xs-3.text-center.row-field
+                                            input#id-edit-city.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-1.row-label.text-right State<span class="asterisk-red">*</span>
+                                        .col-xs-2.text-center.row-field
+                                            input#id-edit-state.form-control(type="text", value="", class="validate[required]")
+                                        .col-xs-1.row-label.text-right Zip<span class="asterisk-red">*</span>
+                                        .col-xs-2.text-center.row-field
+                                            input#id-edit-zip.form-control(type="text", value="", class="validate[required]")
+                                    .row
+                                        .col-xs-3.row-label.text-right Assigned Group<span class="asterisk-red">*</span>
+                                        .col-xs-3.text-center.row-field
+                                            select#id-edit-group
+                                                option(value="Admin") Admin
+                                        .col-xs-6
+                            .row.pass-line
+                            .row
+                                .col-xs-3.row-label
+                                    h4 Oauth information
+                                .col-xs-9
+                                    .row
+                                        .col-xs-3.row-label.text-right Oauth Client ID
+                                        #id-edit-oauth-client-id.col-xs-9.row-label 93bd5920-6e3b-4cda-b444-dd1f0991dc42
+                                        .col-xs-3.row-label.text-right Oauth Client Secret
+                                        #id-edit-oauth-client-secret.col-xs-9.row-label QYnhZ7A_Ee247xSYrKNL_G4j__r4UfUp5QKWMfKtnkw
+                            .row.pass-line
+                        .modal-footer
+                            .row
+                                button.js-modal-btn-cancel.btn.btn-default(data-dismiss="modal", style="margin-right: 20px;", type="button") Cancel
+                                button.js-modal-edit-client-btn.btn.btn-default(aria-hidden="true", type="button") Save Changes
 
 
         #modal-add-new-group.modal.fade(tabindex="-1", role="dialog", aria-labelledby="confirm-alert-label", aria-hidden="true")

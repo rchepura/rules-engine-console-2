@@ -1,421 +1,226 @@
-define(['jquery', 'backbone', 'moment'], function($, Backbone, Moment) {
+define(['jquery', 'backbone'], function($, Backbone) {
     return Backbone.View.extend({
         el: '#id-content-report',
         Model: Backbone.Model.extend(),
-        moment: Moment,
-        Settings: {},
-        StatisticsReport: {},
+        GraphHeight: 260,
+        GraphWidth: 400,
+        enableInteractivity: true,
         initialize: function() {
-            var me = this;           
-            
+            var me = this;
+
             window.REPORT_VIEW = me;
 
             me.options.eventPubSub.bind("initReport", function(callback) {
                 callback(me);
+                if ( me.options.graphData ) {
+                    me.GraphHeight = me.options.graphData.height || me.GraphHeight;
+                    me.GraphWidth = me.options.graphData.width || me.GraphWidth;
+                    me.enableInteractivity = !me.options.graphData.disableInteractivity;
+                }
                 me.init();
             });
-            $('input#userCSV').off().on('change', function () {
-                var file = ($(this)[0].files || [])[0];
+        },
+        events: {
 
-                me.doUploadCSV(file, function(filePath) {
-                    me.sendCSV(filePath);
-                });
-            });
-            
         },
-        events: {            
-            'click .settins-email-apply': "onClickEmailApply",
-            'click button#update-password': "onClickUpdatePassword",
-            'click button#id-reset-eula': "onClickResetEula",
-            'click button#id-upload-user-csv': "onClickUploadUserCSV",
-            'click #id-setings-admins span.user-checkbox': "onEnableAdmin"
-        },
-        onEnableAdmin: function (e) {
-            var me = this,
-                $elem = $(e.currentTarget),
-                currUserEmail = $elem.attr('data-id');
-            
-            if ( $elem.hasClass('active') ) {
-                me.deleteAdmin(currUserEmail, function() {
-                    $elem.removeClass('active');
-                });
-            } else {
-                me.addAdmin(currUserEmail, function() {
-                    $elem.addClass('active');
-                });
-            }            
-        },
-        onClickUploadUserCSV: function (e) {
-            var me = this;
-            
-            $('#userCSV').val('').click();
-        },
-        doUploadCSV: function (file, callback) {
-            var me = this,
-                formData = new FormData(),
-                loc = 'tmpFile';
-
-// csv file data:
-//             
-//firstName,lastName,email,role,password
-//John,Smith,11234@123.com,ARTIST,123
-//John,Smith,2123@123.com,LEADER,123
-
-            if (!file) {
-                return;
-            }
-
-            formData.append('usercsv', file);
-
-            me.showLoader();
-            $.ajax({
-                url: loc,
-                data: formData,
-                contentType: false,
-                type: "POST",
-                processData: false,
-                complete: function (res) {
-                    var data = (res.responseJSON || {}).data;
-                    me.hideLoader();
-                    callback(data);
-                }
-            });
-        },
-        sendCSV: function(filePath) {
-            var me = this,
-                csvModel = new me.Model({filecsv: filePath, formData: {}});
-
-            if ( me.saveInprocess ) {
-                return;
-            }
-            me.saveInprocess = true;
-            Util.showSpinner();
-            csvModel.save( null, {
-                url: 'api/leadercontroller/users/script',
-                complete: function(res) {
-                    if ( (/^2\d{2}$/).test( (res || {}).status ) ) {
-                        Alerts.General.display({
-                            title: 'Success',
-                            content: 'User CSV file has been uploaded successfully.'
-                        });
-                    } else {
-                        Alerts.Error.display({
-                            title: 'Error',
-                            content: 'Failed. (' + (res || {}).status + ')'
-                        });
-                    }
-                    delete me.saveInprocess;
-                    Util.hideSpinner();
-                }
-            });
-        },
-        addAdmin: function(userAdmin, callback) {
-            var me = this,
-                user = new me.Model();
-
-            if ( me.saveInprocess ) {
-                return;
-            }
-            me.saveInprocess = true;
-            Util.showSpinner();
-            user.save({userAdmin: userAdmin}, {
-                url: 'admin',
-                success: function(model, res) {                    
-                    if ( res && false !== res.success ) {                        
-                        callback(res.data || []);
-                    } else {
-                        Alerts.Error.display({
-                            title: 'Error',
-                            content: 'Authorization Failed.'
-                        });
-                        Backbone.history.navigate('#/logout');
-                    }
-                    Util.hideSpinner();
-                },
-                error: function(res) {
-                    callback([]);
-                },
-                complete: function() {
-                    delete me.saveInprocess;
-                }
-            });
-        },
-        deleteAdmin: function(userAdmin, callback) {
-            var me = this,
-                user = new me.Model({id: 'del'});
-            
-            Util.showSpinner();
-            user.destroy({
-                url: 'admin/' + userAdmin,
-                success: function(model, res) {                    
-                    if ( res && false !== res.success ) {                        
-                        callback(res.data || []);
-                    } else {
-                        Alerts.Error.display({
-                            title: 'Error',
-                            content: 'Authorization Failed.'
-                        });
-                        Backbone.history.navigate('#/logout');
-                    }
-                    Util.hideSpinner();
-                },
-                error: function(res) {
-                    callback([]);
-                }
-            });
-        },
-        getAdmins: function(callback) {
+        getTopics: function(callback) {
             var me = this,
                 user = new me.Model();
             
+            callback();
+            return;
+
             Util.showSpinner();
             user.fetch({
-                url: 'admin',
-                success: function(model, res) {                    
-                    if ( res && false !== res.success ) {                        
-                        callback(res.data || []);
-                    } else {
-                        Alerts.Error.display({
-                            title: 'Error',
-                            content: 'Authorization Failed.'
-                        });
-                        Backbone.history.navigate('#/logout');
-                    }
-                },
-                error: function(res) {
-                    callback([]);
-                    Util.hideSpinner();
-                }
-            });
-        },
-        getUsers: function(callback) {
-            var me = this,
-                user = new me.Model();
-            
-            me.AdminUsers = {};
-            me.AdminUserList = [];
-            
-            Util.showSpinner();
-            user.fetch({
-                url: 'api/leadercontroller/all/console/?offset=0&page_size=20000',
+                url: 'api/topiccontroller/analytics',
                 success: function(model, res) {
-                    var users,
-                        fixedUsers = [];
-                    
+                    var topics;
+
                     if ( res && false !== res.success ) {
-                        
-                        users = (res || {}).users || [];
-                        
-                        me.getAdmins(function(admins) {
-                            for ( var i = 0 ; i < users.length; i++ ) {
-                                if ( users[i] && (/@/).test(users[i].email) && _(['LEADER','ADMIN']).contains(users[i].role) ) {
-                                    if ( _(admins).contains(users[i].email) ) {
-                                        users[i].accessConsole = true;
-                                    }
-                                    me.AdminUsers[users[i].id] = users[i];
-                                    fixedUsers.push(users[i]);
-                                }
-                            }
-                            me.AdminUserList = fixedUsers;
-                            callback(fixedUsers);
-                        });                        
+                        topics = res || {};
+                        callback(topics);
                     } else {
-                        Alerts.Error.display({
-                            title: 'Error',
-                            content: 'Authorization Failed.'
-                        });
                         Backbone.history.navigate('#/logout');
                     }
                 },
                 complete: function(res) {
                     if ( 401 == (res || {}).status ) {
-                        Alerts.Error.display({
-                            title: 'Error',
-                            content: 'Authorization Failed.'
-                        });
                         Backbone.history.navigate('#/logout');
                     }
                     Util.hideSpinner();
                 }
             });
         },
-        onClickUpdatePassword: function(e) {
+        renderActiveApprovalRequestors: function(data) {
             var me = this,
-                pass = new me.Model(),
-                isValid = true,
-                iFields = $('input#currentPassword, input#newPassword, input#confirmPassword'),
-                userInfo = JSON.parse($.cookie('UserInfo')) || {};
+                graphData, options,
+                template = $(_.template($('#templateReportActiveApprovalRegquestorsView').html(), {data: data || {}}));
 
-            iFields.each(function() {
-                if ( !isValid || !$(this).validationEngine('validate') ) {
-                    isValid = false;
-                    return;
+            me.$el.find('.content-active-approval-requestors-list').html(template);
+
+            graphData = google.visualization.arrayToDataTable((function() {
+                var resData = [['activeApprovalRequestors', '% of Active Approval Requestors']];
+                _.each( (data || []).reverse(), function(model, key) {
+                    resData.push([model.level, model.value]);
+                });
+                return resData;
+            })());
+            options = {
+//                height: me.GraphHeight,
+//                width: me.GraphWidth,
+                enableInteractivity: me.enableInteractivity,
+                chartArea: {top: 15, bottom: 15},
+                legend: {position: 'none'},
+                slices: {
+                    0: { color: '#C55C57' },
+                    1: { color: '#A3BC65' }
                 }
-            });
-            
-            if ( !isValid || me.saveInprocess ) {
-                return;
-            }
-            me.saveInprocess = true;
-            Util.showSpinner();
-            pass.save({
-                id: userInfo.userIdentifier,
-                oldPassword: $('input#currentPassword').val(),
-                formData: {
-                    password: $('input#newPassword').val()
+            };
+            new google.visualization.PieChart(document.getElementById('active-approval-requestors')).draw(graphData, options);
+        },
+        renderApprovalRates: function(data) {
+            var me = this,
+                graphData, options,
+                template = $(_.template($('#templateReportApprovalRatesView').html(), {data: data || {}}));
+
+            me.$el.find('.content-approval-rates-list').html(template);
+
+            graphData = google.visualization.arrayToDataTable((function() {
+                var resData = [['Approval Rates', {type: "number"}, {role: "style"}]];
+                _.each(data || [], function(model, key) {
+                    resData.push([model.level, model.value, model.color]);
+                });
+                return resData;
+            })());            
+            options = {
+//                height: me.GraphHeight,
+//                width: me.GraphWidth,
+                enableInteractivity: me.enableInteractivity,
+                chartArea: {top: 15, bottom: 20},
+                legend: {position: 'none'},
+                hAxis: {textPosition: 'none'},
+                vAxis: {
+                    title: 'Number of Approvals',
+                    titleTextStyle: {bold: true},
+                    minValue: 0,
+                    format: ''
                 }
-            }, {
-                url: 'api/leadercontroller/update/' + userInfo.userIdentifier,
-                dataType: 'text',
-                success: function(model, res) {
-                    if ( (/SUCCESS/).test(res) ) {
-                        iFields.val('');
-                        Alerts.General.display({
-                            title: 'Success',
-                            content: 'Password has been updated successfully.'
-                        });
-                    } else {
-                        Alerts.Error.display({
-                            title: 'Error',
-                            content: (res || {}).message || 'Failed during update password.'
-                        });
-                    }
+            };
+            new google.visualization.ColumnChart(document.getElementById('approval-rates')).draw(graphData, options);
+        },
+        renderApprovalResponseTime: function(data) {
+            var me = this,
+                graphData, options,
+                template = $(_.template($('#templateApprovalResponseTimeView').html(), {data: {Actual: '#578BC1', Average: '#C6C6C6'}}));
+
+            me.$el.find('.content-approval-response-time-list').html(template);
+
+            graphData = google.visualization.arrayToDataTable((function() {
+                var resData = [['Month', 'Actual', 'Average']];
+                _.each(data || [], function(model, key) {
+                    resData.push([model.level].concat(model.value));
+                });
+                return resData;
+            })());
+            options = {
+//                height: me.GraphHeight,
+//                width: me.GraphWidth,
+                enableInteractivity: me.enableInteractivity,
+                chartArea: {top: 15, bottom: 20},
+                legend: {position: 'none'},
+//                hAxis: {textPosition: 'none'},
+                vAxis: {
+                    title: 'Number Days',
+                    titleTextStyle: {bold: true},
+                    minValue: 0,
+                    format: ''
                 },
-                complete: function(res) {
-                    delete me.saveInprocess;
-                    Util.hideSpinner();                    
-                }
-            });
-        },
-        getEmailAddress: function(callback) {
-            var me = this,
-                email = new me.Model();
-            
-            me.CurrEmail = '';
-            
-            Util.showSpinner();
-            email.fetch({
-                url: 'api/leadercontroller/helpemail',
-                dataType: 'text',
-                success: function(model, res) {
-                    res = res || {};
-                    
-                    if ( res && false !== res.success ) {
-                        me.CurrEmail = res || 'N/A';
-
-                        if ( callback ) {
-                            callback();
-                        } else {
-                            me.render();
-                        }
-                        
-                    } else {
-                        Alerts.Error.display({
-                            title: 'Error',
-                            content: 'Authorization Failed.'
-                        });
-                        Backbone.history.navigate('#/logout');
-                    }
-                },
-                complete: function(res) {
-                    if ( 401 == (res || {}).status ) {
-                        Alerts.Error.display({
-                            title: 'Error',
-                            content: 'Authorization Failed.'
-                        });
-                        Backbone.history.navigate('#/logout');
-                    }
-                    Util.hideSpinner();
-                }
-            });
-        },
-        onClickEmailApply: function () {
-            var me = this,
-                email = me.$el.find('input#id-settings-email'),
-                emailModel;
-        
-            
-            if ( !email.validationEngine('validate') ) {
-                return;
-            }
-            
-            emailModel = new me.Model({id: 1, formData: {email: email.val()}});
-
-            if ( me.saveInprocess ) {
-                return;
-            }
-            me.saveInprocess = true;
-            Util.showSpinner();
-            emailModel.save( null, {
-                url: 'api/leadercontroller/helpemail',
-                complete: function(res) {
-                    if ( 200 == (res || {}).status ) {
-                        Alerts.General.display({
-                            title: 'Success',
-                            content: 'Email Address has been updated successfully.'
-                        });
-                        me.getEmailAddress();
-                    } else {
-                        Alerts.Error.display({
-                            title: 'Error',
-                            content: 'Failed. (' + (res || {}).status + ')'
-                        });
-                    }
-                    delete me.saveInprocess;
-                    Util.hideSpinner();
-                }
-            });
-        },
-        onClickResetEula: function() {
-            var me = this,
-                eulaModel = new me.Model();
-
-            if ( me.saveInprocess ) {
-                return;
-            }
-            me.saveInprocess = true;
-            Util.showSpinner();
-            eulaModel.save( null, {
-                url: 'api/leadercontroller/eula/reset',
-                complete: function(res) {
-                    if ( (/^2\d{2}$/).test( (res || {}).status ) ) {
-                        Alerts.General.display({
-                            title: 'Success',
-                            content: 'EULA for Users has been reseted successfully.'
-                        });
-                    } else {
-                        Alerts.Error.display({
-                            title: 'Error',
-                            content: 'Failed. (' + (res || {}).status + ')'
-                        });
-                    }
-                    delete me.saveInprocess;
-                    Util.hideSpinner();
-                }
-            });
-        },
-        render: function() {
-            var me = this;
-            
-            me.$el.find('input#id-settings-email').val(me.CurrEmail || '');
-        },
-        renderAdmins: function(userAdmins) {
-            var me = this,
-                template = $(_.template($('#templateAdminsListView').html(), {data: userAdmins}));
-            
-            me.$el.find('#id-setings-admins .content-users-list').html(template);
+                colors: ['#578BC1','#C6C6C6']
+            };
+            new google.visualization.AreaChart(document.getElementById('approval-response-time')).draw(graphData, options);
         },
         init: function() {
             var me = this;
-            
-            $('input#currentPassword, input#newPassword, input#confirmPassword').val('');
-            
-            me.getEmailAddress(function(data) {
-                me.render();
+  
+            me.getTopics(function(sData) {
+                me.render(sData);
             });
-            me.getUsers(function(data) {
-                me.renderAdmins(data);
+        },
+        render: function(reportData) {
+            var me = this, renderDashboard, regCount = 0,
+                colors = ['#A3BC65', '#C55C57', '#578BC1', '#5EBACF', '#6296C7', '#ABC370'],
+                colors2 = ['#578BC1', '#C6C6C6'],
+                ActiveApprovalRequestors = [], ApprovalRates = [], ApprovalResponseTime = [];
+            
+            reportData = reportData || {
+                ActiveApprovalRequestors: {
+                    'Approvals requested': 62,
+                    'No approvals requested': 38
+                },
+                ApprovalRates: {
+                    'Approved': 50,
+                    'Rejected': 15,
+                    'Pending': 10
+                },
+                ApprovalResponseTime: {
+                    Apr: [0.8, 1],
+                    May: [2.5, 2.3],
+                    Jun: [2.3, 2]
+//                    Actual : {
+//                        Apr: 0.8,
+//                        May: 2.5,
+//                        Jun: 2.3
+//                    },
+//                    Average : {
+//                        Apr: 1,
+//                        May: 2.3,
+//                        Jun: 2
+//                    }
+//                    Actual : {
+//                        Apr: [0.8, 1.2, 2.5],
+//                        May: [2,0, 1.5, 2.0],
+//                        Jun: [1.8, 2.0, 2.2]
+//                    },
+//                    Average : {
+//                        Apr: [1.0, 1.2, 2.4],
+//                        May: [1,9, 1.4, 2.0],
+//                        Jun: [1.8, 2.3, 2.0]
+//                    }
+                }
+            };
+            
+            _.each((reportData.ActiveApprovalRequestors || {}), function(val, key) {
+                ActiveApprovalRequestors.push({level: key, value: val, color: colors[regCount++]});
+                if ( !colors[regCount] ) {
+                    regCount = 0;
+                }
             });
+            regCount = 0;
+            _.each((reportData.ApprovalRates || {}), function(val, key) {
+                ApprovalRates.push({level: key, value: val, color: colors[regCount++]});
+                if ( !colors[regCount] ) {
+                    regCount = 0;
+                }
+            });
+            _.each((reportData.ApprovalResponseTime || {}), function(val, key) {
+                ApprovalResponseTime.push({level: key, value: val, color: colors2[regCount++]});
+                if ( !colors2[regCount] ) {
+                    regCount = 0;
+                }
+            });
+            renderDashboard = function() {
+                me.renderActiveApprovalRequestors(ActiveApprovalRequestors);
+                me.renderApprovalRates(ApprovalRates);
+                me.renderApprovalResponseTime(ApprovalResponseTime);
+            };
+
+            if ( !google.visualization ) {
+                google.charts.load('current', {packages: ['corechart', 'bar']});
+                google.charts.setOnLoadCallback(renderDashboard);
+            } else {
+                renderDashboard();
+            }
+            
         },
         showLoader: function() {
             Util.showSpinner();

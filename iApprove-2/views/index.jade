@@ -134,59 +134,59 @@ block content
                             span.arrow-sort-dn
                     .content-logs-list
                 #id-content-report.main-content
-                    .row.settings-row
-                        .col-xs-4.settings-coll-1
-                            .title-2 SUPPORT EMAIL CHANGE
-                        .col-xs-8.settings-coll-2
-                            .row
-                                .col-xs-9 
-                                    span.label-txt
-                                    input#id-settings-email.form-control(type="text", name="id-settings-email", value="", class="validate[required,custom[email]]")
-                                .col-xs-3
-                                    button.settins-email-apply.btn.btn-default(type="button") Apply
-                    .row.settings-row
-                        .col-xs-4.settings-coll-1
-                            .title-2 Change password
-                        .col-xs-8.settings-coll-2
-                            .row
-                                .col-xs-9
-                                    span.label-txt Current password
-                                    input#currentPassword.form-control(type="password", name="currentPassword", value="", placeholder="Current Password", class="validate[required]")
-                                .col-xs-3 &nbsp;
-                            .row
-                                .col-xs-9
-                                    span.label-txt New password
-                                    input#newPassword.form-control(type="password", name="newPassword", value="", placeholder="Enter Password", class="validate[required]")
-                                .col-xs-3 &nbsp;
-                            .row(style="margin-bottom: 50px;")
-                                .col-xs-9
-                                    span.label-txt Confirm new password
-                                    input#confirmPassword.form-control(type="password", name="confirmPassword", value="", placeholder="Confirm Password", class="validate[required,equals[newPassword]]")
-                                .col-xs-3
-                                    button#update-password.btn.btn-default(type="button", data-id="") Apply
-                    .row.settings-row
-                        .col-xs-3.settings-coll-1
-                            .title-2 Manage Admins
-                        #id-setings-admins.col-xs-9.settings-coll-2(style="padding: 0 15px 0 0;")
-                            .row.users-row.header-row
-                                .col-xs-1.user-cell.text-center.sort-by-user-password Active
-                                .col-xs-2.user-cell.sort-by-name(data-id="firstName") First Name
-                                .col-xs-2.user-cell.sort-by-name(data-id="lastName") Last Name
-                                .col-xs-5.user-cell.sort-by-name(data-id="email") Email Address
-                                .col-xs-2.user-cell.text-center User Picture
-                            .content-users-list                                
-                    .row.settings-row
-                        .col-xs-3.settings-coll-1
-                            .title-2(style="color: #c40001;") Danger zone
-                        .col-xs-9.settings-coll-2
-                            .row
-                                .col-xs-12.danger-zone 
-                                    button#id-reset-eula.btn.btn-default(type="button") Reset EULA for Users
-                                    span This will make all users to accept new EULA when they login
-                            .row
-                                .col-xs-12.danger-zone(style="margin-bottom: 50px;")
-                                    button#id-upload-user-csv.btn.btn-default(type="button") Upload User CSV file
-                                    span Uploading CSV file will create users
+                    .row.tab-buttons
+                        .col-xs-10
+                            h4 Approvals
+                        .col-xs-2.text-right
+                            button.js-download-report.btn.btn-default(type="button") Export to Excel
+                            
+                    .row.report-row
+                        .col-xs-4.report-col
+                            .row.text-center
+                                h4 % of Active Approval Requestors
+                            .row.dash-graph-row
+                                .col-xs-12.dashboard-graph-box
+                                    #active-approval-requestors
+                                .row.dashboard-table-box
+                                    .content-active-approval-requestors-list.legend-box.clearfix
+                        .col-xs-4.report-col
+                            .row.text-center
+                                h4 Approval Rates
+                            .row.dash-graph-row
+                                .col-xs-12.dashboard-graph-box
+                                    #approval-rates
+                                .row.dashboard-table-box
+                                    .content-approval-rates-list.legend-box.clearfix(style="width: 200px;")
+                        .col-xs-4.report-col
+                            .row.text-center
+                                h4 Approval Response Time
+                            .row.dash-graph-row
+                                .col-xs-12.dashboard-graph-box
+                                    #approval-response-time
+                                .row.dashboard-table-box
+                                    .content-approval-response-time-list.legend-box.clearfix(style="width: 200px;")
+                                    
+        script#templateReportActiveApprovalRegquestorsView(type="text/template")
+            <% _.each(data, function(model, key) { %>
+            .col-xs-10.exp-col.text-left
+                span.rect-label(style!="background-color:<%- model.color %>")
+                | <%- model.level %>
+            .col-xs-2.exp-col <%- model.value %>%
+            <% }); %>
+        script#templateReportApprovalRatesView(type="text/template")
+            <% _.each(data, function(model, key) { %>
+            .col-xs-10.exp-col.text-left
+                span.rect-label(style!="background-color:<%- model.color %>")
+                | <%- model.level %>
+            .col-xs-2.exp-col <%- model.value %>
+            <% }); %>
+        script#templateApprovalResponseTimeView(type="text/template")
+            <% _.each(data, function(color, label) { %>
+            .col-xs-10.exp-col.text-left
+                span.rect-label(style!="background-color:<%- color %>")
+                | <%- label %>
+            .col-xs-2.exp-col
+            <% }); %>
 
         script#templateUsersListView(type="text/template")
             <% _.each(data, function(model, key) { %>
